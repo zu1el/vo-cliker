@@ -1,15 +1,22 @@
 from PyQt5.QtWidgets import *
-import sys
 from localization import local
+import sys
 
 current_lang = "en"
+
 ua = local("localization/ua.json")
 en = local("localization/en_login.json")
+
+
+def getcurlenglocal(tag, lang=None):
+    if lang: return ua.get(tag) if lang == "ua" else en.get(tag)
+    return ua.get(tag) if current_lang == "ua" else en.get(tag)
+
 
 App = QApplication(sys.argv)
 
 login = QWidget()
-login.setStyleSheet("""background-image: url("data/background.jpg"); background-repeat: no-repeat; background-position: center; color: #FFFFFF; border: 0px; font-size: 35px;""")
+login.setStyleSheet(open("Styles/login.qss").read())
 login.setFixedSize(440, 700)
 
 loginMainLine = QVBoxLayout()
@@ -18,59 +25,37 @@ login_line = QHBoxLayout()
 password_line = QHBoxLayout()
 sing_in_line = QHBoxLayout()
 sing_up_line = QHBoxLayout()
-chek_line = QHBoxLayout()
+localization_line = QHBoxLayout()
 
-login_label = QLabel(en.get("login"))
-login_label.setStyleSheet("""font-size: 45px; background:rgba(0, 0, 0, 0);""")
-
+login_label = QLabel(getcurlenglocal("login"))
 login_input = QLineEdit()
 password_input = QLineEdit()
-for widget in [login_input, password_input]: widget.setStyleSheet("""color: #FFFFFF; border-radius: 10px; border-style: outset; background: #222222; width: 340; height: 45; font-size: 25px; padding: 10px;""")
-login_input.setPlaceholderText(en.get("ent-login"))
-password_input.setPlaceholderText(en.get("ent-password"))
-sing_in = QPushButton(en.get("sing-in"))
-sing_up = QPushButton(en.get("sing-up"))
-for widget in [sing_in, sing_up]: widget.setStyleSheet("""QPushButton {color: #FFFFFF; border-radius: 10px; border-style: outset; background: #222222; width: 340; height: 45; font-size: 25; padding: 5px;} QPushButton:hover {background: #191919} QPushButton:pressed {border-style: inset; background: #151515}""")
-ua_localization = QCheckBox(en.get("ua-localization"))
-ua_localization.setStyleSheet("""font-size: 16px; background:rgba(0, 0, 0, 0);""")
+login_input.setPlaceholderText(getcurlenglocal("ent-login"))
+password_input.setPlaceholderText(getcurlenglocal("ent-password"))
+sing_in = QPushButton(getcurlenglocal("sing-in"))
+sing_up = QPushButton(getcurlenglocal("sing-up"))
+ualocalization = QCheckBox(getcurlenglocal("ua-localization"))
 
 spliter = QSplitter()
-spliter.setStyleSheet("""background:rgba(0, 0, 0, 0);""")
 
-chek_line.addWidget(spliter)
-chek_line.addWidget(ua_localization)
-chek_line.addWidget(spliter)
 
-label_line.addWidget(spliter)
-label_line.addWidget(login_label)
-label_line.addWidget(spliter)
+def centerwidget(widget, line):
+    line.addWidget(spliter)
+    line.addWidget(widget)
+    line.addWidget(spliter)
 
-login_line.addWidget(spliter)
-login_line.addWidget(login_input)
-login_line.addWidget(spliter)
 
-password_line.addWidget(spliter)
-password_line.addWidget(password_input)
-password_line.addWidget(spliter)
+centerwidget(ualocalization, localization_line)
+centerwidget(login_label, label_line)
+centerwidget(login_input, login_line)
+centerwidget(password_input, password_line)
+centerwidget(sing_in, sing_in_line)
+centerwidget(sing_up, sing_up_line)
 
-sing_in_line.addWidget(spliter)
-sing_in_line.addWidget(sing_in)
-sing_in_line.addWidget(spliter)
-
-sing_up_line.addWidget(spliter)
-sing_up_line.addWidget(sing_up)
-sing_up_line.addWidget(spliter)
-
-loginMainLine.addLayout(chek_line)
-loginMainLine.addWidget(spliter)
-loginMainLine.addWidget(spliter)
-loginMainLine.addWidget(spliter)
+loginMainLine.addLayout(localization_line)
+for i in range(4): loginMainLine.addWidget(spliter)
 loginMainLine.addLayout(label_line)
-loginMainLine.addWidget(spliter)
-loginMainLine.addWidget(spliter)
-loginMainLine.addWidget(spliter)
-loginMainLine.addWidget(spliter)
-loginMainLine.addWidget(spliter)
+for i in range(5): loginMainLine.addWidget(spliter)
 loginMainLine.addLayout(login_line)
 loginMainLine.addLayout(password_line)
 loginMainLine.addLayout(sing_in_line)
@@ -80,39 +65,84 @@ loginMainLine.addWidget(spliter)
 login.setLayout(loginMainLine)
 
 
-#------------------------------------
+# game window
 
 
 game = QWidget()
+game.setStyleSheet(open("Styles/game.qss").read())
+
 game.setFixedSize(440, 700)
+
+game_line = QVBoxLayout()
+menu_line = QHBoxLayout()
+
+menu = QMenuBar()
+gamemenu = menu.addMenu(getcurlenglocal("game"))
+shopmenu = menu.addMenu(getcurlenglocal("shop"))
+
+statistic = QAction(getcurlenglocal("statistic"))
+gamemenu.addAction(statistic)
+
+reset = gamemenu.addMenu(getcurlenglocal("reset-data"))
+reset.addAction(getcurlenglocal("accept"))
+reset.addAction(getcurlenglocal("reject"))
+
+quit_game = QAction("Quit")
+gamemenu.addAction(quit_game)
+
+game_line.addWidget(menu)
+
+game.setLayout(game_line)
+
+# func
 
 
 def localization():
     global current_lang
     if current_lang == "en":
         current_lang = "ua"
-        login_label.setText(ua.get("login"))
-        login_input.setPlaceholderText(ua.get("ent-login"))
-        password_input.setPlaceholderText(ua.get("ent-password"))
-        sing_in.setText(ua.get("sing-in"))
-        sing_up.setText(ua.get("sing-up"))
-        ua_localization.setText(ua.get("ua-localization"))
+        login_label.setText(getcurlenglocal("login", "ua"))
+        login_input.setPlaceholderText(getcurlenglocal("ent-login", "ua"))
+        password_input.setPlaceholderText(getcurlenglocal("ent-password", "ua"))
+        sing_in.setText(getcurlenglocal("sing-in", "ua"))
+        sing_up.setText(getcurlenglocal("sing-up", "ua"))
+        ualocalization.setText(getcurlenglocal("ua-localization", "ua"))
     else:
         current_lang = "en"
-        login_label.setText(en.get("login"))
-        login_input.setPlaceholderText(en.get("ent-login"))
-        password_input.setPlaceholderText(en.get("ent-password"))
-        sing_in.setText(en.get("sing-in"))
-        sing_up.setText(en.get("sing-up"))
-        ua_localization.setText(en.get("ua-localization"))
+        login_label.setText(getcurlenglocal("login"))
+        login_input.setPlaceholderText(getcurlenglocal("ent-login"))
+        password_input.setPlaceholderText(getcurlenglocal("ent-password"))
+        sing_in.setText(getcurlenglocal("sing-in"))
+        sing_up.setText(getcurlenglocal("sing-up"))
+        ualocalization.setText(getcurlenglocal("ua-localization"))
 
-def logining(login_, password):
-    login.close()
+
+def menu_func(q):
+    statistic = getcurlenglocal("statistic")
+    match q.text():
+        case str(statistic):
+            print(q.text())
+        case _:
+            print(q.text())
+
+
+def singin(l, p):
+    statistic.setText(getcurlenglocal("statistic"))
+    quit_game.setText(getcurlenglocal("quit"))
+    #reset.setText(getcurlenglocal("reset-data"))
     game.show()
+    login.close()
 
-ua_localization.clicked.connect(localization)
 
-sing_in.clicked.connect(lambda: logining("zufel", "password"))
+def singup(l, p):
+    pass
+
+
+ualocalization.clicked.connect(localization)
+
+sing_in.clicked.connect(lambda: singin("zufel", "password"))
+gamemenu.triggered[QAction].connect(menu_func)
+
 
 login.show()
 App.exec()

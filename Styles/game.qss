@@ -1,0 +1,29 @@
+QWidget {
+background: #222222;
+}
+
+QMenuBar {
+    background-color: transparent;
+    width: 206;
+    height: 50;
+    color: #FFFFFF;
+    font-size: 24px;
+}
+
+QMenuBar::item {
+    color : white;
+    margin-top:4px;
+    spacing: 3px;
+    background: #202020;
+    color: #FFFFFF;
+    font-size: 24px;
+}
+
+QMenuBar::item:selected {
+    background: #191919;
+    font-size: 24px;
+}
+
+QMenuBar::item:pressed {
+    background: #232323;
+}

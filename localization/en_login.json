@@ -4,5 +4,14 @@
   "ent-password": "enter your password",
   "sing-in": "sing in",
   "sing-up": "sing up",
-  "ua-localization": "ua language"
+  "ua-localization": "ua language",
+  "statistic": "statistic",
+  "shop": "shop",
+  "boosts": "boosts",
+  "quit": "quit",
+  "game": "game",
+  "go-menu": "go menu",
+  "reject": "reject",
+  "accept": "accept",
+  "reset-data": "from the beginning"
 }

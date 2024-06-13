@@ -1,0 +1,50 @@
+QWidget {
+    background-image: url("data/background.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    color: #FFFFFF;
+    font-size: 35px;
+}
+QLabel {
+    font-size: 45px;
+    background:rgba(0, 0, 0, 0);
+}
+QLineEdit {
+    color: #FFFFFF;
+    border-radius: 10px;
+    border-style: outset;
+    background: #222222;
+    width: 340;
+    height: 45;
+    font-size: 25px;
+    padding: 10px;
+}
+
+QPushButton {
+    color: #FFFFFF;
+    border-radius: 10px;
+    border-style: outset;
+    background: #222222;
+    width: 340;
+    height: 45;
+    font-size: 25;
+    padding: 5px;
+}
+
+QPushButton:hover {
+    background: #191919;
+}
+
+QPushButton:pressed {
+    border-style: inset;
+    background: #151515;
+}
+
+QCheckBox {
+    font-size: 16px;
+    background: rgba(0, 0, 0, 0);
+}
+
+QSplitter {
+background: rgba(0, 0, 0, 0);
+}
