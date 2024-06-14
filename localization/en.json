@@ -1,0 +1,22 @@
+{
+  "login": "Login",
+  "ent-login": "Enter your login",
+  "ent-password": "Enter your password",
+  "sing-in": "Sing in",
+  "sing-up": "Sing up",
+  "ua-localization": "UA Language",
+  "statistic": "My statistic",
+  "shop": "Shop",
+  "boosts": "Boosts",
+  "quit": "Quit game",
+  "game": "Game",
+  "go-menu": "Go menu",
+  "reject": "Reject",
+  "accept": "Accept",
+  "reset-data": "From the beginning",
+  "pumping": "Pumping",
+  "promo-code": "Promo cods",
+  "promo-history": "History",
+  "promo-input": "Enter",
+  "promo-create": "Create"
+}

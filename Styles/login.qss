@@ -1,5 +1,5 @@
 QWidget {
-    background-image: url("data/background.jpg");
+    background-image: url("photo/login_bg.jpg");
     background-repeat: no-repeat;
     background-position: center;
     color: #FFFFFF;

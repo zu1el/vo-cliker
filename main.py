@@ -1,19 +1,22 @@
 from PyQt5.QtWidgets import *
-from localization import local
+from localization import Local
 import sys
 
 current_lang = "en"
 
-ua = local("localization/ua.json")
-en = local("localization/en_login.json")
+ua = Local("localization/ua.json")
+en = Local("localization/en.json")
 
 
 def getcurlenglocal(tag, lang=None):
-    if lang: return ua.get(tag) if lang == "ua" else en.get(tag)
+    if lang:
+        return ua.get(tag) if lang == "ua" else en.get(tag)
     return ua.get(tag) if current_lang == "ua" else en.get(tag)
 
 
 App = QApplication(sys.argv)
+App.setApplicationName("VO-coin")
+
 
 login = QWidget()
 login.setStyleSheet(open("Styles/login.qss").read())
@@ -53,9 +56,11 @@ centerwidget(sing_in, sing_in_line)
 centerwidget(sing_up, sing_up_line)
 
 loginMainLine.addLayout(localization_line)
-for i in range(4): loginMainLine.addWidget(spliter)
+for i in range(4):
+    loginMainLine.addWidget(spliter)
 loginMainLine.addLayout(label_line)
-for i in range(5): loginMainLine.addWidget(spliter)
+for i in range(5):
+    loginMainLine.addWidget(spliter)
 loginMainLine.addLayout(login_line)
 loginMainLine.addLayout(password_line)
 loginMainLine.addLayout(sing_in_line)
@@ -70,79 +75,83 @@ login.setLayout(loginMainLine)
 
 game = QWidget()
 game.setStyleSheet(open("Styles/game.qss").read())
-
 game.setFixedSize(440, 700)
 
 game_line = QVBoxLayout()
 menu_line = QHBoxLayout()
 
-menu = QMenuBar()
-gamemenu = menu.addMenu(getcurlenglocal("game"))
-shopmenu = menu.addMenu(getcurlenglocal("shop"))
+menu = QMenuBar(game)
+gamemenu = menu.addMenu("")
+shopmenu = menu.addMenu("")
 
-statistic = QAction(getcurlenglocal("statistic"))
+statistic = QAction()
+quit_game = QAction()
+go_menu = QAction()
 gamemenu.addAction(statistic)
-
-reset = gamemenu.addMenu(getcurlenglocal("reset-data"))
-reset.addAction(getcurlenglocal("accept"))
-reset.addAction(getcurlenglocal("reject"))
-
-quit_game = QAction("Quit")
 gamemenu.addAction(quit_game)
+gamemenu.addAction(go_menu)
+reset = gamemenu.addMenu("")
+accept_reset = reset.addAction("")
+reject_reset = reset.addAction("")
+
+boosts = QAction()
+pumping = QAction()
+promocode = shopmenu.addMenu("")
+promo_history = promocode.addAction("")
+promo_input = promocode.addAction("")
+promo_create = promocode.addAction("")
+shopmenu.addAction(boosts)
+shopmenu.addAction(pumping)
 
 game_line.addWidget(menu)
-
 game.setLayout(game_line)
+
 
 # func
 
 
 def localization():
     global current_lang
-    if current_lang == "en":
-        current_lang = "ua"
-        login_label.setText(getcurlenglocal("login", "ua"))
-        login_input.setPlaceholderText(getcurlenglocal("ent-login", "ua"))
-        password_input.setPlaceholderText(getcurlenglocal("ent-password", "ua"))
-        sing_in.setText(getcurlenglocal("sing-in", "ua"))
-        sing_up.setText(getcurlenglocal("sing-up", "ua"))
-        ualocalization.setText(getcurlenglocal("ua-localization", "ua"))
-    else:
-        current_lang = "en"
-        login_label.setText(getcurlenglocal("login"))
-        login_input.setPlaceholderText(getcurlenglocal("ent-login"))
-        password_input.setPlaceholderText(getcurlenglocal("ent-password"))
-        sing_in.setText(getcurlenglocal("sing-in"))
-        sing_up.setText(getcurlenglocal("sing-up"))
-        ualocalization.setText(getcurlenglocal("ua-localization"))
+    current_lang = "ua" if current_lang == "en" else "en"
+    login_label.setText(getcurlenglocal("login"))
+    login_input.setPlaceholderText(getcurlenglocal("ent-login"))
+    password_input.setPlaceholderText(getcurlenglocal("ent-password"))
+    sing_in.setText(getcurlenglocal("sing-in"))
+    sing_up.setText(getcurlenglocal("sing-up"))
+    ualocalization.setText(getcurlenglocal("ua-localization"))
 
 
 def menu_func(q):
-    statistic = getcurlenglocal("statistic")
-    match q.text():
-        case str(statistic):
-            print(q.text())
-        case _:
-            print(q.text())
+    pass
 
 
-def singin(l, p):
+def singin(user_login, user_password):
+    gamemenu.setTitle(getcurlenglocal("game"))
+    shopmenu.setTitle(getcurlenglocal("shop"))
     statistic.setText(getcurlenglocal("statistic"))
     quit_game.setText(getcurlenglocal("quit"))
-    #reset.setText(getcurlenglocal("reset-data"))
+    reset.setTitle(getcurlenglocal("reset-data"))
+    go_menu.setText(getcurlenglocal("go-menu"))
+    reject_reset.setText(getcurlenglocal("reject"))
+    accept_reset.setText(getcurlenglocal("accept"))
+    promocode.setTitle(getcurlenglocal("promo-code"))
+    promo_history.setText(getcurlenglocal("promo-history"))
+    promo_input.setText(getcurlenglocal("promo-input"))
+    promo_create.setText(getcurlenglocal("promo-create"))
+    boosts.setText(getcurlenglocal("boosts"))
+    pumping.setText(getcurlenglocal("pumping"))
+
     game.show()
     login.close()
 
 
-def singup(l, p):
+def singup(user_login, user_password):
     pass
 
 
 ualocalization.clicked.connect(localization)
-
-sing_in.clicked.connect(lambda: singin("zufel", "password"))
+sing_in.clicked.connect(lambda: singin(login_input.text(), password_input.text()))
 gamemenu.triggered[QAction].connect(menu_func)
-
 
 login.show()
 App.exec()

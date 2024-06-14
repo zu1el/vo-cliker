@@ -1,9 +1,11 @@
 QWidget {
-background: #222222;
+    background: #222222;
+    background-image: url("photo/game_bg.png");
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 QMenuBar {
-    background-color: transparent;
     width: 206;
     height: 50;
     color: #FFFFFF;
@@ -14,16 +16,37 @@ QMenuBar::item {
     color : white;
     margin-top:4px;
     spacing: 3px;
-    background: #202020;
+    background: #191919;
     color: #FFFFFF;
     font-size: 24px;
 }
 
 QMenuBar::item:selected {
-    background: #191919;
+    background-image: false;
+    border-radius: 15px;
+    background: #202020;
     font-size: 24px;
 }
 
 QMenuBar::item:pressed {
-    background: #232323;
+    background-image: false;
+    background: #202020;
+    font-size: 24px;
+}
+QMenu {
+    border-radius: 15px;
+    background: #202020;
+    color: #898989;
+    font-size: 24px;
+    padding: 10px;
+}
+
+QMenu::item {
+    border-radius: 10px;
+    padding: 2px 20px 10px 20px;
+}
+
+QMenu::item:selected {
+    color: #FFFFFF;
+    background: #191919;
 }
