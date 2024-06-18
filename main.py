@@ -1,17 +1,33 @@
 from PyQt5.QtWidgets import *
-from localization import Local
+from localization import Local, current_lang
+from loger import logger
 import sys
-
-current_lang = "en"
+import json
 
 ua = Local("localization/ua.json")
 en = Local("localization/en.json")
+
+status = []
 
 
 def getcurlenglocal(tag, lang=None):
     if lang:
         return ua.get(tag) if lang == "ua" else en.get(tag)
     return ua.get(tag) if current_lang == "ua" else en.get(tag)
+
+
+def logger_read(lt, ls):
+    match ls:
+        case "warn":
+            logger.warning(lt)
+        case "err":
+            logger.error(lt)
+        case "info":
+            logger.info(lt)
+        case "crt":
+            logger.critical(lt)
+        case _:
+            logger.debug(lt)
 
 
 App = QApplication(sys.argv)
@@ -23,6 +39,7 @@ login.setStyleSheet(open("Styles/login.qss").read())
 login.setFixedSize(440, 700)
 
 loginMainLine = QVBoxLayout()
+info_line = QHBoxLayout()
 label_line = QHBoxLayout()
 login_line = QHBoxLayout()
 password_line = QHBoxLayout()
@@ -30,6 +47,9 @@ sing_in_line = QHBoxLayout()
 sing_up_line = QHBoxLayout()
 localization_line = QHBoxLayout()
 
+info = QLineEdit()
+info.setPlaceholderText(getcurlenglocal("debug-line"))
+info.setReadOnly(True)
 login_label = QLabel(getcurlenglocal("login"))
 login_input = QLineEdit()
 password_input = QLineEdit()
@@ -49,6 +69,7 @@ def centerwidget(widget, line):
 
 
 centerwidget(ualocalization, localization_line)
+centerwidget(info, info_line)
 centerwidget(login_label, label_line)
 centerwidget(login_input, login_line)
 centerwidget(password_input, password_line)
@@ -61,11 +82,13 @@ for i in range(4):
 loginMainLine.addLayout(label_line)
 for i in range(5):
     loginMainLine.addWidget(spliter)
+loginMainLine.addLayout(info_line)
 loginMainLine.addLayout(login_line)
 loginMainLine.addLayout(password_line)
 loginMainLine.addLayout(sing_in_line)
 loginMainLine.addLayout(sing_up_line)
 loginMainLine.addWidget(spliter)
+
 
 login.setLayout(loginMainLine)
 
@@ -113,44 +136,134 @@ game.setLayout(game_line)
 def localization():
     global current_lang
     current_lang = "ua" if current_lang == "en" else "en"
+    logger.info("localization lang set to {}".format(current_lang))
+    info.setPlaceholderText(getcurlenglocal("debug-line"))
     login_label.setText(getcurlenglocal("login"))
     login_input.setPlaceholderText(getcurlenglocal("ent-login"))
     password_input.setPlaceholderText(getcurlenglocal("ent-password"))
     sing_in.setText(getcurlenglocal("sing-in"))
     sing_up.setText(getcurlenglocal("sing-up"))
     ualocalization.setText(getcurlenglocal("ua-localization"))
+    info.setText(getcurlenglocal(status[1], current_lang))
 
 
 def menu_func(q):
     pass
 
 
-def singin(user_login, user_password):
-    gamemenu.setTitle(getcurlenglocal("game"))
-    shopmenu.setTitle(getcurlenglocal("shop"))
-    statistic.setText(getcurlenglocal("statistic"))
-    quit_game.setText(getcurlenglocal("quit"))
-    reset.setTitle(getcurlenglocal("reset-data"))
-    go_menu.setText(getcurlenglocal("go-menu"))
-    reject_reset.setText(getcurlenglocal("reject"))
-    accept_reset.setText(getcurlenglocal("accept"))
-    promocode.setTitle(getcurlenglocal("promo-code"))
-    promo_history.setText(getcurlenglocal("promo-history"))
-    promo_input.setText(getcurlenglocal("promo-input"))
-    promo_create.setText(getcurlenglocal("promo-create"))
-    boosts.setText(getcurlenglocal("boosts"))
-    pumping.setText(getcurlenglocal("pumping"))
+def singin(status):
+    status_code, status_text = status[0], status[1]
+    if status_code:
+        gamemenu.setTitle(getcurlenglocal("game"))
+        shopmenu.setTitle(getcurlenglocal("shop"))
+        statistic.setText(getcurlenglocal("statistic"))
+        quit_game.setText(getcurlenglocal("quit"))
+        reset.setTitle(getcurlenglocal("reset-data"))
+        go_menu.setText(getcurlenglocal("go-menu"))
+        reject_reset.setText(getcurlenglocal("reject"))
+        accept_reset.setText(getcurlenglocal("accept"))
+        promocode.setTitle(getcurlenglocal("promo-code"))
+        promo_history.setText(getcurlenglocal("promo-history"))
+        promo_input.setText(getcurlenglocal("promo-input"))
+        promo_create.setText(getcurlenglocal("promo-create"))
+        boosts.setText(getcurlenglocal("boosts"))
+        pumping.setText(getcurlenglocal("pumping"))
 
-    game.show()
-    login.close()
+        game.show()
+        login.close()
+    else:
+        info.setText(getcurlenglocal(status_text, current_lang))
+
+
+def cehksingin(user_login, user_password):
+    global status
+    logger.info("try to sing in as {}:{}".format(user_login, user_password))
+    status = [False, getcurlenglocal("None error", "en")]
+    log = ["None log", "crt"]
+    with open("data/game.json") as file:
+        data = json.loads(file.read())
+        logger.info("data dump sucefulled")
+    if user_login == "":
+        log = ["No input login", "err"]
+        status = [False, getcurlenglocal("please input login", "en")]
+        logger_read(log[0], log[1])
+        singin(status)
+        return
+    else:
+        if user_password == "":
+            log = ["No input password", "err"]
+            status = [False, getcurlenglocal("please input password", "en")]
+            logger_read(log[0], log[1])
+            singin(status)
+            return
+        else:
+            for user in data["users"]:
+                if user_login == user["login"]:
+                    if user_password == user["password"]:
+                        logger.info(f"sing in sucefulled as {user_login}")
+                        status = [True, user["_id"]]
+                        singin(status)
+                        return
+                    else:
+                        log = ["invalid password", "err"]
+                        status = [False, getcurlenglocal("wrong password", "en")]
+                        logger_read(log[0], log[1])
+                        singin(status)
+                        return
+                else:
+                    log = ["invalid login", "err"]
+                    status = [False, getcurlenglocal("unknown login", "en")]
+                    logger_read(log[0], log[1])
+                    singin(status)
+                    return
 
 
 def singup(user_login, user_password):
-    pass
+    global status
+    logger.info("try to sing up as {}:{}".format(user_login, user_password))
+    status = [False, getcurlenglocal("None error", "en")]
+    log = ["None log", "crt"]
+    with open("data/game.json") as file:
+        data = json.loads(file.read())
+        logger.info("data dump sucefulled")
+    if user_login == "":
+        log = ["No input login", "err"]
+        status = [False, getcurlenglocal("please input login", "en")]
+        logger_read(log[0], log[1])
+        singin(status)
+        return
+    else:
+        if user_password == "":
+            log = ["No input password", "err"]
+            status = [False, getcurlenglocal("please input password", "en")]
+            logger_read(log[0], log[1])
+            singin(status)
+            return
+        else:
+            for user in data["users"]:
+                if user_login == user["login"]:
+                    if user_password == user["password"]:
+                        logger.info(f"sing in sucefulled as {user_login}")
+                        status = [True, user["_id"]]
+                        singin(status)
+                        return
+                    else:
+                        log = ["invalid password", "err"]
+                        status = [False, getcurlenglocal("wrong password", "en")]
+                        logger_read(log[0], log[1])
+                        singin(status)
+                        return
+                else:
+                    log = ["invalid login", "err"]
+                    status = [False, getcurlenglocal("unknown login", "en")]
+                    logger_read(log[0], log[1])
+                    singin(status)
+                    return
 
 
 ualocalization.clicked.connect(localization)
-sing_in.clicked.connect(lambda: singin(login_input.text(), password_input.text()))
+sing_in.clicked.connect(lambda: cehksingin(login_input.text(), password_input.text()))
+sing_up.clicked.connect(lambda: singup(login_input.text(), password_input.text()))
 gamemenu.triggered[QAction].connect(menu_func)
 
 login.show()

@@ -18,5 +18,11 @@
   "promo-code": "Промо коди",
   "promo-history": "Історія",
   "promo-input": "Ввести",
-  "promo-create": "Створити"
+  "promo-create": "Створити",
+  "debug-line": "...",
+  "None error": "невідома помилка!",
+  "please input login": "Будьласка введіть логін",
+  "please input password": "Будьласка введіть пароль",
+  "wrong password": "невірний пароль",
+  "unknown login": "невідомий логін"
 }

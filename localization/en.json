@@ -18,5 +18,11 @@
   "promo-code": "Promo cods",
   "promo-history": "History",
   "promo-input": "Enter",
-  "promo-create": "Create"
+  "promo-create": "Create",
+  "debug-line": "debug line",
+  "None error": "None error",
+  "please input login": "please input login",
+  "please input password": "please input password",
+  "wrong password": "wrong password",
+  "unknown login": "unknown login"
 }

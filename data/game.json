@@ -1,0 +1,95 @@
+{
+  "users": [
+    {
+      "_id": 1,
+      "login": "zufel",
+      "password": "password",
+      "cur balance": 500,
+      "on tap": 1,
+      "energy": 500,
+      "energy limit": 1000,
+      "regiset date": "15.06.2024 0:40",
+      "taps": 500,
+      "all balance": 500
+
+    },
+    {
+      "_id": 2,
+      "login": "pupsik",
+      "password": "password",
+      "cur balance": 500,
+      "on tap": 1,
+      "energy": 500,
+      "energy limit": 1000,
+      "regiset date": "15.06.2024 0:40",
+      "taps": 500,
+      "all balance": 500
+
+    },
+    {
+      "_id": 3,
+      "login": "vupsen",
+      "password": "password",
+      "cur balance": 500,
+      "on tap": 1,
+      "energy": 500,
+      "energy limit": 1000,
+      "regiset date": "15.06.2024 0:40",
+      "taps": 500,
+      "all balance": 500
+
+    },
+    {
+      "_id": 4,
+      "login": "pupsen",
+      "password": "password",
+      "cur balance": 500,
+      "on tap": 1,
+      "energy": 500,
+      "energy limit": 1000,
+      "regiset date": "15.06.2024 0:40",
+      "taps": 500,
+      "all balance": 500
+
+    },
+    {
+      "_id": 5,
+      "login": "dupsen",
+      "password": "password",
+      "cur balance": 500,
+      "on tap": 1,
+      "energy": 500,
+      "energy limit": 1000,
+      "regiset date": "15.06.2024 0:40",
+      "taps": 500,
+      "all balance": 500
+
+    },
+    {
+      "_id": 6,
+      "login": "srupsen",
+      "password": "password",
+      "cur balance": 500,
+      "on tap": 1,
+      "energy": 500,
+      "energy limit": 1000,
+      "regiset date": "15.06.2024 0:40",
+      "taps": 500,
+      "all balance": 500
+
+    },
+    {
+      "_id": 7,
+      "login": "pesupsen",
+      "password": "password",
+      "cur balance": 500,
+      "on tap": 1,
+      "energy": 500,
+      "energy limit": 1000,
+      "regiset date": "15.06.2024 0:40",
+      "taps": 500,
+      "all balance": 500
+
+    }
+  ]
+}
