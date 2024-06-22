@@ -1,6 +1,7 @@
 import json
 current_lang = "en"
 
+
 class Local:
     def __init__(self, file):
         self.lang_file = file

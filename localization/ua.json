@@ -19,12 +19,12 @@
   "promo-history": "Історія",
   "promo-input": "Ввести",
   "promo-create": "Створити",
-  "debug-line": "...",
+  "debug-line": "відладка",
   "None error": "невідома помилка!",
   "please input login": "Будьласка введіть логін",
   "please input password": "Будьласка введіть пароль",
   "wrong password": "невірний пароль",
   "unknown login": "невідомий логін",
-  "login already used": "цей логін зайнятий!"
-
+  "login already used": "цей логін зайнятий!",
+  "critical error": "критична помилка"
 }

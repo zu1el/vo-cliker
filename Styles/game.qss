@@ -4,8 +4,24 @@ QWidget {
     background-repeat: no-repeat;
     background-position: center;
 }
+QLabel {
+    color: #FFFFFF;
+    font-size: 35px;
+    background:rgba(0, 0, 0, 0);
+}
+
+QPushButton {
+    width: 440px;
+    height: 250px;
+    background:rgba(0, 0, 0, 0);
+}
+
+QSplitter {
+background: rgba(0, 0, 0, 0);
+}
 
 QMenuBar {
+    background:rgba(0, 0, 0, 0);
     width: 206;
     height: 50;
     color: #FFFFFF;
@@ -49,4 +65,10 @@ QMenu::item {
 QMenu::item:selected {
     color: #FFFFFF;
     background: #191919;
+}
+QProgressBar {
+    background:rgba(0, 0, 0, 0);
+    height: 50px;
+    width: 220px;
+    border-radius: 15px;
 }

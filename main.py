@@ -1,37 +1,19 @@
 import datetime
-
 from PyQt5.QtWidgets import *
 from localization import Local, current_lang
-from loger import logger
+from loger import logger, logger_read
 import sys
 import json
-import datetime
-from data import user_data_dump
+from data import user_data_dump, user_data_load, data_dump, data_load
 
-ua = Local("localization/ua.json")
-en = Local("localization/en.json")
-
-status = [False, "critical error"]
+ua, en = Local("localization/ua.json"), Local("localization/en.json")
+status = [False, "debug-line"]
 
 
 def getcurlenglocal(tag, lang=None):
     if lang:
         return ua.get(tag) if lang == "ua" else en.get(tag)
     return ua.get(tag) if current_lang == "ua" else en.get(tag)
-
-
-def logger_read(lt, ls):
-    match ls:
-        case "warn":
-            logger.warning(lt)
-        case "err":
-            logger.error(lt)
-        case "info":
-            logger.info(lt)
-        case "crt":
-            logger.critical(lt)
-        case _:
-            logger.debug(lt)
 
 
 App = QApplication(sys.argv)
@@ -63,13 +45,11 @@ sing_in = QPushButton(getcurlenglocal("sing-in"))
 sing_up = QPushButton(getcurlenglocal("sing-up"))
 ualocalization = QCheckBox(getcurlenglocal("ua-localization"))
 
-spliter = QSplitter()
-
 
 def centerwidget(widget, line):
-    line.addWidget(spliter)
+    line.addWidget(QSplitter())
     line.addWidget(widget)
-    line.addWidget(spliter)
+    line.addWidget(QSplitter())
 
 
 centerwidget(ualocalization, localization_line)
@@ -81,17 +61,15 @@ centerwidget(sing_in, sing_in_line)
 centerwidget(sing_up, sing_up_line)
 
 loginMainLine.addLayout(localization_line)
-for i in range(4):
-    loginMainLine.addWidget(spliter)
+for i in range(4): loginMainLine.addWidget(QSplitter())
 loginMainLine.addLayout(label_line)
-for i in range(5):
-    loginMainLine.addWidget(spliter)
+for i in range(5): loginMainLine.addWidget(QSplitter())
 loginMainLine.addLayout(info_line)
 loginMainLine.addLayout(login_line)
 loginMainLine.addLayout(password_line)
 loginMainLine.addLayout(sing_in_line)
 loginMainLine.addLayout(sing_up_line)
-loginMainLine.addWidget(spliter)
+loginMainLine.addWidget(QSplitter())
 
 
 login.setLayout(loginMainLine)
@@ -130,7 +108,26 @@ promo_create = promocode.addAction("")
 shopmenu.addAction(boosts)
 shopmenu.addAction(pumping)
 
+balance = QLabel()
+main_btn = QPushButton()
+energy_balance = QLabel()
+energy_limit = QLabel()
+energy_progres = QProgressBar()
+
 game_line.addWidget(menu)
+balance_line = QHBoxLayout()
+centerwidget(balance, balance_line)
+game_line.addWidget(QSplitter())
+game_line.addLayout(balance_line)
+game_line.addWidget(QSplitter())
+game_line.addWidget(main_btn)
+energy_line = QHBoxLayout()
+energy_data = QVBoxLayout()
+energy_data.addWidget(energy_balance)
+energy_data.addWidget(energy_limit)
+energy_line.addLayout(energy_data)
+energy_line.addWidget(energy_progres)
+game_line.addLayout(energy_line)
 game.setLayout(game_line)
 
 
@@ -148,7 +145,7 @@ def localization():
     sing_in.setText(getcurlenglocal("sing-in"))
     sing_up.setText(getcurlenglocal("sing-up"))
     ualocalization.setText(getcurlenglocal("ua-localization"))
-    info.setText(getcurlenglocal(status[1], current_lang))
+    info.setText(getcurlenglocal(status[1], current_lang)) if info.text() != "" else info.setPlaceholderText(getcurlenglocal(status[1], current_lang))
 
 
 def menu_func(q):
@@ -156,8 +153,9 @@ def menu_func(q):
 
 
 def singin(status):
-    status_code, status_text = status[0], status[1]
-    if status_code:
+    user = user_data_load("data/game.json", status[1])
+    if status[0]:
+        print(user["login"], user["password"])
         gamemenu.setTitle(getcurlenglocal("game"))
         shopmenu.setTitle(getcurlenglocal("shop"))
         statistic.setText(getcurlenglocal("statistic"))
@@ -172,11 +170,16 @@ def singin(status):
         promo_create.setText(getcurlenglocal("promo-create"))
         boosts.setText(getcurlenglocal("boosts"))
         pumping.setText(getcurlenglocal("pumping"))
+        balance.setText(str(user["cur balance"]))
+        energy_balance.setText(str(user["energy"]))
+        energy_limit.setText(f"""/{user["energy limit"]}""")
+        progres = 100/(user["energy limit"]/user["energy"])
+        energy_progres.setValue(int(progres))
 
         game.show()
         login.close()
     else:
-        info.setText(getcurlenglocal(status_text, current_lang))
+        info.setText(getcurlenglocal(status[1], current_lang))
 
 
 def singup(status):
@@ -207,21 +210,21 @@ def cehksingin(user_login, user_password):
     global status
     logger.info("try to sing in as {}:{}".format(user_login, user_password))
     status = [False, getcurlenglocal("None error", "en")]
-    log = ["None log", "crt"]
+    log = ["None", "crt"]
     with open("data/game.json") as file:
         data = json.loads(file.read())
         logger.info("data dump sucefulled")
     if user_login == "":
         log = ["No input login", "err"]
         status = [False, getcurlenglocal("please input login", "en")]
-        logger_read(log[0], log[1])
+        logger_read(log)
         singin(status)
         return
     else:
         if user_password == "":
             log = ["No input password", "err"]
             status = [False, getcurlenglocal("please input password", "en")]
-            logger_read(log[0], log[1])
+            logger_read(log)
             singin(status)
             return
         else:
@@ -235,36 +238,35 @@ def cehksingin(user_login, user_password):
                     else:
                         log = ["invalid password", "err"]
                         status = [False, getcurlenglocal("wrong password", "en")]
-                        logger_read(log[0], log[1])
+                        logger_read(log)
                         singin(status)
                         return
                 else:
                     log = ["invalid login", "err"]
                     status = [False, getcurlenglocal("unknown login", "en")]
-                    logger_read(log[0], log[1])
-                    singin(status)
-                    return
+            logger_read(log)
+            singin(status)
+            return
 
 
 def cheksingup(user_login, user_password):
     global status
     logger.info("try to sing up as {}:{}".format(user_login, user_password))
     status = [False, getcurlenglocal("None error", "en")]
-    log = ["None log", "crt"]
-    with open("data/game.json") as file:
+    with open("data/game.json", "r") as file:
         data = json.load(file)
         logger.info("data dump sucefulled")
     if user_login == "":
         log = ["No input login", "err"]
         status = [False, getcurlenglocal("please input login", "en")]
-        logger_read(log[0], log[1])
+        logger_read(log)
         singup(status)
         return
     else:
         if user_password == "":
             log = ["No input password", "err"]
             status = [False, getcurlenglocal("please input password", "en")]
-            logger_read(log[0], log[1])
+            logger_read(log)
             singup(status)
             return
         else:
@@ -285,18 +287,18 @@ def cheksingup(user_login, user_password):
                         "on tap": 1,
                         "energy": 500,
                         "energy limit": 1000,
-                        "regiset date": datetime.date,
+                        "regiset date": datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S"),
                         "taps": 500,
                         "all balance": 500
                     }
                     user_data_dump("data/game.json", user)
-                    logger_read(log[0], log[1])
+                    logger_read(log)
                     singup(status)
                     return
 
 
 ualocalization.clicked.connect(localization)
-sing_in.clicked.connect(lambda: cehksingin(login_input.text(), password_input.text()))
+sing_in.clicked.connect(lambda: cehksingin("zufel", "password"))
 sing_up.clicked.connect(lambda: cheksingup(login_input.text(), password_input.text()))
 gamemenu.triggered[QAction].connect(menu_func)
 

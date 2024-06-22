@@ -1,5 +1,5 @@
 import json
-from loger import logger
+from loger import logger, logger_read
 
 
 def data_load(file):
@@ -8,7 +8,7 @@ def data_load(file):
         return json.load(data)
 
 
-def uaser_data_load(file, _id):
+def user_data_load(file, _id):
     with open(file, "r", encoding="UTF-8") as data:
         data = json.load(data)
         for user in data["users"]:
@@ -34,6 +34,7 @@ def user_data_dump(file, new_user):
                 json.dump(data, file)
         else:
             list_id += 1
-    data = data["users"].append(new_user)
+    data["users"].append(new_user)
+
     with open(file, "w") as file:
-        json.dump(data, file)
+        json.dump(data, file, indent=4)
