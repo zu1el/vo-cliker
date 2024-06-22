@@ -24,5 +24,6 @@
   "please input login": "please input login",
   "please input password": "please input password",
   "wrong password": "wrong password",
-  "unknown login": "unknown login"
+  "unknown login": "unknown login",
+  "login already used": "login already used"
 }

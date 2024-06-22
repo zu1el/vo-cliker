@@ -1,13 +1,17 @@
+import datetime
+
 from PyQt5.QtWidgets import *
 from localization import Local, current_lang
 from loger import logger
 import sys
 import json
+import datetime
+from data import user_data_dump
 
 ua = Local("localization/ua.json")
 en = Local("localization/en.json")
 
-status = []
+status = [False, "critical error"]
 
 
 def getcurlenglocal(tag, lang=None):
@@ -175,6 +179,30 @@ def singin(status):
         info.setText(getcurlenglocal(status_text, current_lang))
 
 
+def singup(status):
+    status_code, status_text = status[0], status[1]
+    if status_code:
+        gamemenu.setTitle(getcurlenglocal("game"))
+        shopmenu.setTitle(getcurlenglocal("shop"))
+        statistic.setText(getcurlenglocal("statistic"))
+        quit_game.setText(getcurlenglocal("quit"))
+        reset.setTitle(getcurlenglocal("reset-data"))
+        go_menu.setText(getcurlenglocal("go-menu"))
+        reject_reset.setText(getcurlenglocal("reject"))
+        accept_reset.setText(getcurlenglocal("accept"))
+        promocode.setTitle(getcurlenglocal("promo-code"))
+        promo_history.setText(getcurlenglocal("promo-history"))
+        promo_input.setText(getcurlenglocal("promo-input"))
+        promo_create.setText(getcurlenglocal("promo-create"))
+        boosts.setText(getcurlenglocal("boosts"))
+        pumping.setText(getcurlenglocal("pumping"))
+
+        game.show()
+        login.close()
+    else:
+        info.setText(getcurlenglocal(status_text, current_lang))
+
+
 def cehksingin(user_login, user_password):
     global status
     logger.info("try to sing in as {}:{}".format(user_login, user_password))
@@ -218,52 +246,58 @@ def cehksingin(user_login, user_password):
                     return
 
 
-def singup(user_login, user_password):
+def cheksingup(user_login, user_password):
     global status
     logger.info("try to sing up as {}:{}".format(user_login, user_password))
     status = [False, getcurlenglocal("None error", "en")]
     log = ["None log", "crt"]
     with open("data/game.json") as file:
-        data = json.loads(file.read())
+        data = json.load(file)
         logger.info("data dump sucefulled")
     if user_login == "":
         log = ["No input login", "err"]
         status = [False, getcurlenglocal("please input login", "en")]
         logger_read(log[0], log[1])
-        singin(status)
+        singup(status)
         return
     else:
         if user_password == "":
             log = ["No input password", "err"]
             status = [False, getcurlenglocal("please input password", "en")]
             logger_read(log[0], log[1])
-            singin(status)
+            singup(status)
             return
         else:
             for user in data["users"]:
                 if user_login == user["login"]:
-                    if user_password == user["password"]:
-                        logger.info(f"sing in sucefulled as {user_login}")
-                        status = [True, user["_id"]]
-                        singin(status)
-                        return
-                    else:
-                        log = ["invalid password", "err"]
-                        status = [False, getcurlenglocal("wrong password", "en")]
-                        logger_read(log[0], log[1])
-                        singin(status)
-                        return
+                    logger.info(f"login already used")
+                    status = [False, getcurlenglocal("login already used", "en")]
+                    singup(status)
+                    return
                 else:
-                    log = ["invalid login", "err"]
-                    status = [False, getcurlenglocal("unknown login", "en")]
+                    log = [f"sing up procesing {user_login}:{user_password} possible _id - {len(data["users"])+1}", "info"]
+                    status = [True, len(data["users"])+1]
+                    user = {
+                        "_id": len(data["users"])+1,
+                        "login": user_login,
+                        "password": user_password,
+                        "cur balance": 500,
+                        "on tap": 1,
+                        "energy": 500,
+                        "energy limit": 1000,
+                        "regiset date": datetime.date,
+                        "taps": 500,
+                        "all balance": 500
+                    }
+                    user_data_dump("data/game.json", user)
                     logger_read(log[0], log[1])
-                    singin(status)
+                    singup(status)
                     return
 
 
 ualocalization.clicked.connect(localization)
 sing_in.clicked.connect(lambda: cehksingin(login_input.text(), password_input.text()))
-sing_up.clicked.connect(lambda: singup(login_input.text(), password_input.text()))
+sing_up.clicked.connect(lambda: cheksingup(login_input.text(), password_input.text()))
 gamemenu.triggered[QAction].connect(menu_func)
 
 login.show()

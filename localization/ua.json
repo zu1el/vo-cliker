@@ -24,5 +24,7 @@
   "please input login": "Будьласка введіть логін",
   "please input password": "Будьласка введіть пароль",
   "wrong password": "невірний пароль",
-  "unknown login": "невідомий логін"
+  "unknown login": "невідомий логін",
+  "login already used": "цей логін зайнятий!"
+
 }
