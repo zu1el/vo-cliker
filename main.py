@@ -130,6 +130,35 @@ energy_line.addWidget(energy_progres)
 game_line.addLayout(energy_line)
 game.setLayout(game_line)
 
+# game-my statistic
+game_statistic = QWidget()
+game_statistic.setStyleSheet(open("Styles/game_statistic.qss").read())
+game_statistic.setFixedSize(440, 700)
+
+# shop-promo-history
+shop_promo_history = QWidget()
+shop_promo_history.setStyleSheet(open("Styles/promo/game_history.qss").read())
+shop_promo_history.setFixedSize(440, 700)
+
+# shop-promo-enter
+shop_promo_enter = QWidget()
+shop_promo_enter.setStyleSheet(open("Styles/promo/game_enter.qss").read())
+shop_promo_enter.setFixedSize(440, 700)
+
+# shop-promo-create
+shop_promo_create = QWidget()
+shop_promo_create.setStyleSheet(open("Styles/promo/game_create.qss").read())
+shop_promo_create.setFixedSize(440, 700)
+
+# shop-boosts
+shop_boosts = QWidget()
+shop_boosts.setStyleSheet(open("Styles/game_boosts.qss").read())
+shop_boosts.setFixedSize(440, 700)
+
+# shop-pumping
+shop_pumping = QWidget()
+shop_pumping.setStyleSheet(open("Styles/game_pumping.qss").read())
+shop_pumping.setFixedSize(440, 700)
 
 # func
 
@@ -149,7 +178,49 @@ def localization():
 
 
 def menu_func(q):
-    pass
+    match q.text():
+        case "My statistic":
+            go_statistic()
+        case "Quit game":
+            quit_game_func()
+        case "Go menu":
+            go_login()
+        case "Accept":
+            del_account_accept()
+        case "Reject":
+            del_account_reject()
+        case "History":
+            promo_history_func()
+        case "Enter":
+            promo_enter_func()
+        case "Create":
+            promo_create_func()
+        case "Boosts":
+            boosts_open()
+        case "Pumping":
+            pumping_opne()
+        case "Моя статистика":
+            go_statistic()
+        case "Вийти з гри":
+            quit_game_func()
+        case "Вийти в меню входу":
+            go_login()
+        case "Прийняти":
+            del_account_accept()
+        case "Відмінити":
+            del_account_reject()
+        case "Історія":
+            promo_history_func()
+        case "Ввести":
+            promo_enter_func()
+        case "Створити":
+            promo_create_func()
+        case "Бусти":
+            boosts_open()
+        case "Прокачка":
+            pumping_opne()
+        case _:
+            print("crt error")
 
 
 def singin(status):
@@ -297,10 +368,75 @@ def cheksingup(user_login, user_password):
                     return
 
 
+def go_statistic():
+    game.close()
+    game_statistic.show()
+
+
+def quit_game_func():
+    App.exit()
+
+
+def go_login():
+    game.close()
+    login.show()
+
+
+def del_account_accept():
+    pass
+
+
+def del_account_reject():
+    pass
+
+
+def promo_history_func():
+    game.close()
+    shop_promo_history.show()
+
+
+def promo_enter_func():
+    game.close()
+    shop_promo_enter.show()
+
+
+def promo_create_func():
+    game.close()
+    shop_promo_create.show()
+
+
+def pumping_opne():
+    game.close()
+    shop_pumping.show()
+
+
+def boosts_open():
+    game.close()
+    shop_boosts.show()
+
+
+def main_func():
+    user = user_data_load("data/game.json", status[1])
+    if user["energy"] >= 1:
+        user["cur balance"] += user["on tap"]
+        user["energy"] -= user["on tap"]
+        user["taps"] += 1
+        user["all balance"] += user["on tap"]
+        user_data_dump("data/game.json", user)
+        energy_balance.setText(str(user["energy"]))
+        balance.setText(str(user["cur balance"]))
+        progres = 100 / (user["energy limit"] / user["energy"])
+        energy_progres.setValue(int(progres))
+    else:
+        pass
+
 ualocalization.clicked.connect(localization)
 sing_in.clicked.connect(lambda: cehksingin("zufel", "password"))
 sing_up.clicked.connect(lambda: cheksingup(login_input.text(), password_input.text()))
+main_btn.clicked.connect(lambda: main_func())
+
 gamemenu.triggered[QAction].connect(menu_func)
+shopmenu.triggered[QAction].connect(menu_func)
 
 login.show()
 App.exec()

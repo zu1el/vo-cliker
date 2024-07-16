@@ -9,8 +9,8 @@ def data_load(file):
 
 
 def user_data_load(file, _id):
-    with open(file, "r", encoding="UTF-8") as data:
-        data = json.load(data)
+        with open(file, "r", encoding="UTF-8") as data:
+            data = json.load(data)
         for user in data["users"]:
             if user["_id"] == _id:
                 return user
@@ -20,7 +20,7 @@ def user_data_load(file, _id):
 
 def data_dump(file, data):
     with open(file, "w", encoding="UTF-8") as file:
-        json.dump(file, data, ascii=4)
+        json.dump(file, data, indent=4)
 
 
 def user_data_dump(file, new_user):
@@ -30,11 +30,10 @@ def user_data_dump(file, new_user):
     for user in data["users"]:
         if user["_id"] == new_user["_id"]:
             data["users"][list_id] = new_user
-            with open(file, "w") as file:
-                json.dump(data, file)
+            with open(file, "w") as file_:
+                json.dump(data, file_, indent=4)
         else:
             list_id += 1
-    data["users"].append(new_user)
-
-    with open(file, "w") as file:
-        json.dump(data, file, indent=4)
+            data["users"].append(new_user)
+            with open(file, "w") as file_:
+                json.dump(data, file_, indent=4)

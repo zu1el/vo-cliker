@@ -1,1 +1,16 @@
-{"users": [{"_id": 1, "login": "zufel", "password": "password", "cur balance": 500, "on tap": 1, "energy": 675, "energy limit": 1000, "regiset date": "06/22/2024, 17:56:11", "taps": 500, "all balance": 500}, {"_id": 2, "login": "asd", "password": "asdasd", "cur balance": 500, "on tap": 1, "energy": 500, "energy limit": 1000, "regiset date": "06/22/2024, 17:56:11", "taps": 500, "all balance": 500}, {"_id": 4, "login": "zxc", "password": "czx", "cur balance": 500, "on tap": 1, "energy": 675, "energy limit": 1000, "regiset date": "06/22/2024, 18:15:23", "taps": 500, "all balance": 500}]}
+{
+    "users": [
+        {
+            "_id": 1,
+            "login": "zufel",
+            "password": "password",
+            "cur balance": 659,
+            "on tap": 1,
+            "energy": 424,
+            "energy limit": 1000,
+            "regiset date": "18.06.2024",
+            "taps": 659,
+            "all balance": 659
+        }
+    ]
+}
