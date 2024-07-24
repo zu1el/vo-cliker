@@ -101,10 +101,6 @@ reject_reset = reset.addAction("")
 
 boosts = QAction()
 pumping = QAction()
-promocode = shopmenu.addMenu("")
-promo_history = promocode.addAction("")
-promo_input = promocode.addAction("")
-promo_create = promocode.addAction("")
 shopmenu.addAction(boosts)
 shopmenu.addAction(pumping)
 
@@ -123,10 +119,13 @@ game_line.addWidget(QSplitter())
 game_line.addWidget(main_btn)
 energy_line = QHBoxLayout()
 energy_data = QVBoxLayout()
+energy_line.addWidget(QSplitter())
 energy_data.addWidget(energy_balance)
 energy_data.addWidget(energy_limit)
 energy_line.addLayout(energy_data)
+energy_line.addWidget(QSplitter())
 energy_line.addWidget(energy_progres)
+energy_line.addWidget(QSplitter())
 game_line.addLayout(energy_line)
 game.setLayout(game_line)
 
@@ -189,12 +188,6 @@ def menu_func(q):
             del_account_accept()
         case "Reject":
             del_account_reject()
-        case "History":
-            promo_history_func()
-        case "Enter":
-            promo_enter_func()
-        case "Create":
-            promo_create_func()
         case "Boosts":
             boosts_open()
         case "Pumping":
@@ -209,12 +202,6 @@ def menu_func(q):
             del_account_accept()
         case "Відмінити":
             del_account_reject()
-        case "Історія":
-            promo_history_func()
-        case "Ввести":
-            promo_enter_func()
-        case "Створити":
-            promo_create_func()
         case "Бусти":
             boosts_open()
         case "Прокачка":
@@ -235,10 +222,6 @@ def singin(status):
         go_menu.setText(getcurlenglocal("go-menu"))
         reject_reset.setText(getcurlenglocal("reject"))
         accept_reset.setText(getcurlenglocal("accept"))
-        promocode.setTitle(getcurlenglocal("promo-code"))
-        promo_history.setText(getcurlenglocal("promo-history"))
-        promo_input.setText(getcurlenglocal("promo-input"))
-        promo_create.setText(getcurlenglocal("promo-create"))
         boosts.setText(getcurlenglocal("boosts"))
         pumping.setText(getcurlenglocal("pumping"))
         balance.setText(str(user["cur balance"]))
@@ -264,10 +247,6 @@ def singup(status):
         go_menu.setText(getcurlenglocal("go-menu"))
         reject_reset.setText(getcurlenglocal("reject"))
         accept_reset.setText(getcurlenglocal("accept"))
-        promocode.setTitle(getcurlenglocal("promo-code"))
-        promo_history.setText(getcurlenglocal("promo-history"))
-        promo_input.setText(getcurlenglocal("promo-input"))
-        promo_create.setText(getcurlenglocal("promo-create"))
         boosts.setText(getcurlenglocal("boosts"))
         pumping.setText(getcurlenglocal("pumping"))
 
@@ -388,21 +367,6 @@ def del_account_accept():
 
 def del_account_reject():
     pass
-
-
-def promo_history_func():
-    game.close()
-    shop_promo_history.show()
-
-
-def promo_enter_func():
-    game.close()
-    shop_promo_enter.show()
-
-
-def promo_create_func():
-    game.close()
-    shop_promo_create.show()
 
 
 def pumping_opne():

@@ -72,3 +72,19 @@ QProgressBar {
     width: 220px;
     border-radius: 15px;
 }
+QProgressBar {
+        width: 200px;
+        height: 20px;
+        border: 2px solid rgba(33, 37, 55, 180);
+        border-radius: 20px;
+        text-align: center;
+        background-color: rgba(33, 37, 55, 180);
+        color: white;
+        font-size: 24px;
+        font: bold;
+
+    }
+QProgressBar::chunk {
+    background-color: #fcc434;
+    boder-radius: 20px;
+}
