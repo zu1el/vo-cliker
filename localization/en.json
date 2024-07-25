@@ -26,5 +26,15 @@
   "wrong password": "wrong password",
   "unknown login": "unknown login",
   "login already used": "login already used",
-  "critical error": "critical error"
+  "critical error": "critical error",
+  "game id": "id | ",
+  "game login": "login | ",
+  "game current balance": "balance | ",
+  "game on tap": "vo-coin on tap | ",
+  "game current energy": "energy | ",
+  "game energy limit": "energy limit | ",
+  "game registr date": "register date | ",
+  "game all taps": "taps all time | ",
+  "game all balance": "balance all time | ",
+  "game statistic": "statistic"
 }

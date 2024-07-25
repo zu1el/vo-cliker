@@ -1,7 +1,3 @@
-loger 2024-07-25 22:20:29,264 INFO try to sing in as :
-loger 2024-07-25 22:20:29,265 INFO data dump sucefulled
-loger 2024-07-25 22:20:29,266 ERROR No input login
-loger 2024-07-25 22:20:29,266 CRITICAL No user in data
-loger 2024-07-25 22:20:35,390 INFO try to sing in as zufel:password
-loger 2024-07-25 22:20:35,392 INFO data dump sucefulled
-loger 2024-07-25 22:20:35,392 INFO sing in sucefulled as zufel
+loger 2024-07-26 02:39:42,557 INFO try to sing in as zufel:password
+loger 2024-07-26 02:39:42,559 INFO data dump sucefulled
+loger 2024-07-26 02:39:42,559 INFO sing in sucefulled as zufel

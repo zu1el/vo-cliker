@@ -13,7 +13,7 @@
   "go-menu": "Вийти в меню входу",
   "reject": "Відмінити",
   "accept": "Прийняти",
-  "reset-data": "видалити аккаунт",
+  "reset-data": "обнулити аккаунт",
   "pumping": "Прокачка",
   "promo-code": "Промо коди",
   "promo-history": "Історія",
@@ -26,5 +26,15 @@
   "wrong password": "невірний пароль",
   "unknown login": "невідомий логін",
   "login already used": "цей логін зайнятий!",
-  "critical error": "критична помилка"
+  "critical error": "критична помилка",
+  "game id": "айді | ",
+  "game login": "логін | ",
+  "game current balance": "баланс | ",
+  "game on tap": "монет за клік | ",
+  "game current energy": "енергії | ",
+  "game energy limit": "ліміт енергії | ",
+  "game registr date": "дата реєстрації | ",
+  "game all taps": "кліків за весь час | ",
+  "game all balance": "баланс за весь час | ",
+  "game statistic": "Статистика"
 }

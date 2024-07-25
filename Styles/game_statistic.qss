@@ -1,0 +1,16 @@
+QWidget {
+    background: #222222;
+    background-image: url("photo/statistic_bg.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+QSplitter {
+background: rgba(0, 0, 0, 0);
+}
+
+QLabel {
+    color: #FFFFFF;
+    font-size: 25px;
+    background:rgba(0, 0, 0, 0);
+}

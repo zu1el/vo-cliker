@@ -134,20 +134,70 @@ game_statistic = QWidget()
 game_statistic.setStyleSheet(open("Styles/game_statistic.qss").read())
 game_statistic.setFixedSize(440, 700)
 
-# shop-promo-history
-shop_promo_history = QWidget()
-shop_promo_history.setStyleSheet(open("Styles/promo/game_history.qss").read())
-shop_promo_history.setFixedSize(440, 700)
+game_statistic_main_line = QHBoxLayout()
+game_statistic_v_line = QVBoxLayout()
 
-# shop-promo-enter
-shop_promo_enter = QWidget()
-shop_promo_enter.setStyleSheet(open("Styles/promo/game_enter.qss").read())
-shop_promo_enter.setFixedSize(440, 700)
+game_statistic_label = QLabel(getcurlenglocal("game statistic"))
+game_statistic_label_line = QHBoxLayout()
+game_statistic_id = QLabel(getcurlenglocal("game id"))
+game_statistic_id_line = QHBoxLayout()
+game_statistic_login = QLabel(getcurlenglocal("game login"))
+game_statistic_login_line = QHBoxLayout()
+game_statistic_cur_balance = QLabel(getcurlenglocal("game current balance"))
+game_statistic_cur_balance_line = QHBoxLayout()
+game_statistic_on_tap = QLabel(getcurlenglocal("game on tap"))
+game_statistic_on_tap_line = QHBoxLayout()
+game_statistic_cur_energy = QLabel(getcurlenglocal("game current energy"))
+game_statistic_cur_energy_line = QHBoxLayout()
+game_statistic_limit_energy = QLabel(getcurlenglocal("game energy limit"))
+game_statistic_limit_energy_line = QHBoxLayout()
+game_statistic_reg_date = QLabel(getcurlenglocal("game registr date"))
+game_statistic_reg_date_line = QHBoxLayout()
+game_statistic_all_taps = QLabel(getcurlenglocal("game all taps"))
+game_statistic_all_taps_line = QHBoxLayout()
+game_statistic_all_balance = QLabel(getcurlenglocal("game all balance"))
+game_statistic_all_balance_line = QHBoxLayout()
 
-# shop-promo-create
-shop_promo_create = QWidget()
-shop_promo_create.setStyleSheet(open("Styles/promo/game_create.qss").read())
-shop_promo_create.setFixedSize(440, 700)
+game_statistic_v_line.addWidget(QSplitter())
+game_statistic_v_line.addWidget(QSplitter())
+game_statistic_v_line.addWidget(QSplitter())
+
+centerwidget(game_statistic_label, game_statistic_label_line)
+game_statistic_v_line.addLayout(game_statistic_label_line)
+
+centerwidget(game_statistic_id, game_statistic_id_line)
+game_statistic_v_line.addLayout(game_statistic_id_line)
+
+centerwidget(game_statistic_login, game_statistic_login_line)
+game_statistic_v_line.addLayout(game_statistic_login_line)
+
+centerwidget(game_statistic_cur_balance, game_statistic_cur_balance_line)
+game_statistic_v_line.addLayout(game_statistic_cur_balance_line)
+
+centerwidget(game_statistic_all_balance, game_statistic_all_balance_line)
+game_statistic_v_line.addLayout(game_statistic_all_balance_line)
+
+centerwidget(game_statistic_on_tap, game_statistic_on_tap_line)
+game_statistic_v_line.addLayout(game_statistic_on_tap_line)
+
+centerwidget(game_statistic_all_taps, game_statistic_all_taps_line)
+game_statistic_v_line.addLayout(game_statistic_all_taps_line)
+
+centerwidget(game_statistic_cur_energy, game_statistic_cur_energy_line)
+game_statistic_v_line.addLayout(game_statistic_cur_energy_line)
+
+centerwidget(game_statistic_limit_energy, game_statistic_limit_energy_line)
+game_statistic_v_line.addLayout(game_statistic_limit_energy_line)
+
+centerwidget(game_statistic_reg_date, game_statistic_reg_date_line)
+game_statistic_v_line.addLayout(game_statistic_reg_date_line)
+
+game_statistic_main_line.addLayout(game_statistic_v_line)
+
+game_statistic.setLayout(game_statistic_main_line)
+
+game_statistic_v_line.addWidget(QSplitter())
+game_statistic_v_line.addWidget(QSplitter())
 
 # shop-boosts
 shop_boosts = QWidget()
@@ -211,7 +261,6 @@ def menu_func(q):
 def singin(status):
     user = user_data_load("data/game.json", status[1])
     if status[0]:
-        print(user["login"], user["password"])
         gamemenu.setTitle(getcurlenglocal("game"))
         shopmenu.setTitle(getcurlenglocal("shop"))
         statistic.setText(getcurlenglocal("statistic"))
@@ -238,8 +287,8 @@ def singin(status):
 
 
 def singup(status):
-    status_code, status_text = status[0], status[1]
-    if status_code:
+    user = user_data_load("data/game.json", status[1])
+    if status[0]:
         gamemenu.setTitle(getcurlenglocal("game"))
         shopmenu.setTitle(getcurlenglocal("shop"))
         statistic.setText(getcurlenglocal("statistic"))
@@ -250,11 +299,19 @@ def singup(status):
         accept_reset.setText(getcurlenglocal("accept"))
         boosts.setText(getcurlenglocal("boosts"))
         pumping.setText(getcurlenglocal("pumping"))
+        balance.setText(str(user["cur balance"]))
+        energy_balance.setText(str(user["energy"]))
+        energy_limit.setText(f"""/{user["energy limit"]}""")
+        try:
+            progres = 100 / (user["energy limit"] / user["energy"])
+            energy_progres.setValue(int(progres))
 
+        except Exception as ex:
+            energy_progres.setValue(0)
         game.show()
         login.close()
     else:
-        info.setText(getcurlenglocal(status_text, current_lang))
+        info.setText(getcurlenglocal(status[1], current_lang))
 
 
 def cehksingin(user_login, user_password):
@@ -349,8 +406,21 @@ def cheksingup(user_login, user_password):
 
 
 def go_statistic():
+    user = user_data_load("data/game.json", status[1])
     game.close()
     game_statistic.show()
+    game_statistic_label.setText(getcurlenglocal("game statistic"))
+    game_statistic_label.setStyleSheet("""font-size: 35px;""")
+    game_statistic_id.setText(f"""{getcurlenglocal("game id")}{user["_id"]}""")
+    game_statistic_reg_date.setText(f"""{getcurlenglocal("game registr date")}{str(user["regiset date"])}""")
+    game_statistic_limit_energy.setText(f"""{getcurlenglocal("game energy limit")}{str(user["energy limit"])}""")
+    game_statistic_cur_energy.setText(f"""{getcurlenglocal("game current energy")}{str(user["energy"])}""")
+    game_statistic_all_taps.setText(f"""{getcurlenglocal("game all taps")}{str(user["taps"])}""")
+    game_statistic_all_balance.setText(f"""{getcurlenglocal("game all balance")}{str(user["all balance"])}""")
+    game_statistic_on_tap.setText(f"""{getcurlenglocal("game on tap")}{str(user["on tap"])}""")
+    game_statistic_login.setText(f"""{getcurlenglocal("game login")}{str(user["login"])}""")
+    game_statistic_cur_balance.setText(f"""{getcurlenglocal("game current balance")}{str(user["cur balance"])}""")
+
 
 
 def quit_game_func():
@@ -371,9 +441,11 @@ def del_account_accept():
     user["taps"] = 0
     user["all balance"] = 0
     user_data_dump("data/game.json", user)
-    game.close()
-    game.show()
-
+    balance.setText(str(user["cur balance"]))
+    energy_balance.setText(str(user["energy"]))
+    energy_limit.setText(f"""/{user["energy limit"]}""")
+    progres = 100 / (user["energy limit"] / user["energy"])
+    energy_progres.setValue(int(progres))
 
 
 def pumping_opne():
