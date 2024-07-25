@@ -186,12 +186,12 @@ def menu_func(q):
             go_login()
         case "Accept":
             del_account_accept()
-        case "Reject":
-            del_account_reject()
         case "Boosts":
             boosts_open()
         case "Pumping":
             pumping_opne()
+        case "Go login":
+            go_login()
         case "Моя статистика":
             go_statistic()
         case "Вийти з гри":
@@ -200,14 +200,12 @@ def menu_func(q):
             go_login()
         case "Прийняти":
             del_account_accept()
-        case "Відмінити":
-            del_account_reject()
         case "Бусти":
             boosts_open()
         case "Прокачка":
             pumping_opne()
         case _:
-            print("crt error")
+            print(q.text())
 
 
 def singin(status):
@@ -227,9 +225,12 @@ def singin(status):
         balance.setText(str(user["cur balance"]))
         energy_balance.setText(str(user["energy"]))
         energy_limit.setText(f"""/{user["energy limit"]}""")
-        progres = 100/(user["energy limit"]/user["energy"])
-        energy_progres.setValue(int(progres))
+        try:
+            progres = 100/(user["energy limit"]/user["energy"])
+            energy_progres.setValue(int(progres))
 
+        except Exception as ex:
+            energy_progres.setValue(0)
         game.show()
         login.close()
     else:
@@ -362,11 +363,17 @@ def go_login():
 
 
 def del_account_accept():
-    pass
+    user = user_data_load("data/game.json", status[1])
+    user["cur balance"] = 0
+    user["on tap"] = 1
+    user["energy"] = 500
+    user["energy limit"] = 500
+    user["taps"] = 0
+    user["all balance"] = 0
+    user_data_dump("data/game.json", user)
+    game.close()
+    game.show()
 
-
-def del_account_reject():
-    pass
 
 
 def pumping_opne():
@@ -394,8 +401,9 @@ def main_func():
     else:
         pass
 
+
 ualocalization.clicked.connect(localization)
-sing_in.clicked.connect(lambda: cehksingin("zufel", "password"))
+sing_in.clicked.connect(lambda: cehksingin(login_input.text(), password_input.text()))
 sing_up.clicked.connect(lambda: cheksingup(login_input.text(), password_input.text()))
 main_btn.clicked.connect(lambda: main_func())
 

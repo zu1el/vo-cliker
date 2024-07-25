@@ -27,13 +27,18 @@ def user_data_dump(file, new_user):
     with open(file, "r") as data:
         data = json.load(data)
     list_id = 0
+    ststus = False
     for user in data["users"]:
         if user["_id"] == new_user["_id"]:
             data["users"][list_id] = new_user
             with open(file, "w") as file_:
                 json.dump(data, file_, indent=4)
+            ststus = True
         else:
             list_id += 1
-            data["users"].append(new_user)
-            with open(file, "w") as file_:
-                json.dump(data, file_, indent=4)
+    if not ststus:
+        data["users"].append(new_user)
+        with open(file, "w") as file_:
+            json.dump(data, file_, indent=4)
+    else:
+        return False

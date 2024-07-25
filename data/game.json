@@ -4,13 +4,25 @@
             "_id": 1,
             "login": "zufel",
             "password": "password",
-            "cur balance": 2049,
+            "cur balance": 8,
             "on tap": 1,
-            "energy": 34,
-            "energy limit": 1000,
+            "energy": 492,
+            "energy limit": 500,
             "regiset date": "18.06.2024",
-            "taps": 2049,
-            "all balance": 2049
+            "taps": 8,
+            "all balance": 8
+        },
+        {
+            "_id": 2,
+            "login": "228",
+            "password": "288",
+            "cur balance": 646,
+            "on tap": 1,
+            "energy": 354,
+            "energy limit": 1000,
+            "regiset date": "07/25/2024, 15:55:30",
+            "taps": 646,
+            "all balance": 646
         }
     ]
 }
