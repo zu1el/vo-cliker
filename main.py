@@ -19,7 +19,6 @@ def getcurlenglocal(tag, lang=None):
 App = QApplication(sys.argv)
 App.setApplicationName("VO-coin")
 
-
 login = QWidget()
 login.setStyleSheet(open("Styles/login.qss").read())
 login.setFixedSize(440, 700)
@@ -71,9 +70,7 @@ loginMainLine.addLayout(sing_in_line)
 loginMainLine.addLayout(sing_up_line)
 loginMainLine.addWidget(QSplitter())
 
-
 login.setLayout(loginMainLine)
-
 
 # game window
 
@@ -137,6 +134,7 @@ game_statistic.setFixedSize(440, 700)
 game_statistic_main_line = QHBoxLayout()
 game_statistic_v_line = QVBoxLayout()
 
+game_statistic_back_btn = QPushButton(getcurlenglocal("back"))
 game_statistic_label = QLabel(getcurlenglocal("game statistic"))
 game_statistic_label_line = QHBoxLayout()
 game_statistic_id = QLabel(getcurlenglocal("game id"))
@@ -158,7 +156,8 @@ game_statistic_all_taps_line = QHBoxLayout()
 game_statistic_all_balance = QLabel(getcurlenglocal("game all balance"))
 game_statistic_all_balance_line = QHBoxLayout()
 
-game_statistic_v_line.addWidget(QSplitter())
+game_statistic_v_line.addWidget(game_statistic_back_btn)
+
 game_statistic_v_line.addWidget(QSplitter())
 game_statistic_v_line.addWidget(QSplitter())
 
@@ -208,6 +207,7 @@ shop_boosts.setFixedSize(440, 700)
 shop_pumping = QWidget()
 shop_pumping.setStyleSheet(open("Styles/game_pumping.qss").read())
 shop_pumping.setFixedSize(440, 700)
+
 
 # func
 
@@ -275,7 +275,7 @@ def singin(status):
         energy_balance.setText(str(user["energy"]))
         energy_limit.setText(f"""/{user["energy limit"]}""")
         try:
-            progres = 100/(user["energy limit"]/user["energy"])
+            progres = 100 / (user["energy limit"] / user["energy"])
             energy_progres.setValue(int(progres))
 
         except Exception as ex:
@@ -385,10 +385,11 @@ def cheksingup(user_login, user_password):
                     singup(status)
                     return
                 else:
-                    log = [f"sing up procesing {user_login}:{user_password} possible _id - {len(data["users"])+1}", "info"]
-                    status = [True, len(data["users"])+1]
+                    log = [f"sing up procesing {user_login}:{user_password} possible _id - {len(data["users"]) + 1}",
+                           "info"]
+                    status = [True, len(data["users"]) + 1]
                     user = {
-                        "_id": len(data["users"])+1,
+                        "_id": len(data["users"]) + 1,
                         "login": user_login,
                         "password": user_password,
                         "cur balance": 500,
@@ -409,6 +410,7 @@ def go_statistic():
     user = user_data_load("data/game.json", status[1])
     game.close()
     game_statistic.show()
+    game_statistic_back_btn.setText(getcurlenglocal("back"))
     game_statistic_label.setText(getcurlenglocal("game statistic"))
     game_statistic_label.setStyleSheet("""font-size: 35px;""")
     game_statistic_id.setText(f"""{getcurlenglocal("game id")}{user["_id"]}""")
@@ -422,14 +424,15 @@ def go_statistic():
     game_statistic_cur_balance.setText(f"""{getcurlenglocal("game current balance")}{str(user["cur balance"])}""")
 
 
-
 def quit_game_func():
     App.exit()
 
 
 def go_login():
+    global status
     game.close()
     login.show()
+    status = [False, "debug-line"]
 
 
 def del_account_accept():
@@ -474,10 +477,16 @@ def main_func():
         pass
 
 
+def statistick_back():
+    game_statistic.close()
+    game.show()
+
+
 ualocalization.clicked.connect(localization)
 sing_in.clicked.connect(lambda: cehksingin(login_input.text(), password_input.text()))
 sing_up.clicked.connect(lambda: cheksingup(login_input.text(), password_input.text()))
 main_btn.clicked.connect(lambda: main_func())
+game_statistic_back_btn.clicked.connect(lambda: statistick_back())
 
 gamemenu.triggered[QAction].connect(menu_func)
 shopmenu.triggered[QAction].connect(menu_func)
