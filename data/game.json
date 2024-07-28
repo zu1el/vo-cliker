@@ -4,49 +4,154 @@
             "_id": 1,
             "login": "zufel",
             "password": "password",
-            "cur balance": 11,
-            "on tap": 1,
-            "energy": 489,
+            "game lvl": 1,
+            "cur balance": 645.0,
+            "on tap": 4,
+            "energy": 345,
             "energy limit": 500,
             "regiset date": "18.06.2024",
-            "taps": 11,
-            "all balance": 11
+            "taps": 47,
+            "all balance": 155,
+            "boosts": {
+                "full energy limit": 3,
+                "full energy current": 3
+            }
         },
         {
             "_id": 2,
             "login": "228",
             "password": "288",
+            "game lvl": 1,
             "cur balance": 646,
             "on tap": 1,
             "energy": 354,
             "energy limit": 1000,
             "regiset date": "07/25/2024, 15:55:30",
             "taps": 646,
-            "all balance": 646
+            "all balance": 646,
+            "boosts": {
+                "full energy limit": 3,
+                "full energy current": 3
+            }
         },
         {
             "_id": 3,
             "login": "login",
             "password": "pass",
+            "game lvl": 1,
             "cur balance": 0,
             "on tap": 1,
             "energy": 500,
             "energy limit": 500,
             "regiset date": "07/25/2024, 22:27:19",
             "taps": 0,
-            "all balance": 0
+            "all balance": 0,
+            "boosts": {
+                "full energy limit": 3,
+                "full energy current": 3
+            }
         },
         {
             "_id": 4,
             "login": "popopop",
             "password": "sdfsdfs",
+            "game lvl": 1,
             "cur balance": 510,
             "on tap": 1,
             "energy": 490,
             "energy limit": 1000,
             "regiset date": "07/25/2024, 22:30:32",
             "taps": 510,
-            "all balance": 510
+            "all balance": 510,
+            "boosts": {
+                "full energy limit": 3,
+                "full energy current": 3
+            }
+        },
+        {
+            "_id": 5,
+            "login": "zufel2",
+            "password": "password",
+            "game lvl": 1,
+            "cur balance": 6,
+            "on tap": 1,
+            "energy": 494,
+            "energy limit": 500,
+            "regiset date": "07/27/2024, 15:18:17",
+            "taps": 506,
+            "all balance": 506,
+            "boosts": {
+                "full energy limit": 3,
+                "full energy current": 3
+            }
+        },
+        {
+            "_id": 6,
+            "login": "test5",
+            "password": "password",
+            "game lvl": 1,
+            "cur balance": 6,
+            "on tap": 1,
+            "energy": 494,
+            "energy limit": 500,
+            "regiset date": "07/28/2024, 14:15:45",
+            "taps": 506,
+            "all balance": 506,
+            "boosts": {
+                "full energy limit": 3,
+                "full energy current": 3
+            }
+        },
+        {
+            "_id": 7,
+            "login": "user1",
+            "password": "pass",
+            "game lvl": 1,
+            "cur balance": 22,
+            "on tap": 1,
+            "energy": 478,
+            "energy limit": 500,
+            "regiset date": "07/28/2024, 19:42:13",
+            "taps": 22,
+            "all balance": 22,
+            "boosts": {
+                "full energy limit": 3,
+                "full energy current": 3
+            }
+        },
+        {
+            "_id": 8,
+            "login": "user10",
+            "password": "123",
+            "game lvl": 1,
+            "cur balance": 3,
+            "on tap": 1,
+            "energy": 497,
+            "energy limit": 500,
+            "regiset date": "07/28/2024",
+            "taps": 3,
+            "all balance": 3,
+            "boosts": {
+                "full energy limit": 3,
+                "full energy current": 3
+            }
+        },
+        {
+            "_id": 9,
+            "login": "usret",
+            "password": "123",
+            "game lvl": 1,
+            "cur balance": 0,
+            "on tap": 1,
+            "energy": 500,
+            "energy limit": 500,
+            "regiset date": "07/28/2024",
+            "taps": 0,
+            "all balance": 0,
+            "boosts": {
+                "full energy limit": 3,
+                "full energy current": 3
+            }
         }
     ]
 }

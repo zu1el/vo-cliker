@@ -1,0 +1,38 @@
+QWidget {
+    background: #222222;
+    background-image: url("photo/boost_bg.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+QSplitter {
+background: rgba(0, 0, 0, 0);
+}
+
+QLabel {
+    color: #FFFFFF;
+    font-size: 25px;
+    qproperty-alignment: AlignCenter;
+    background: rgba(0, 0, 0, 0);
+
+}
+QPushButton {
+    color: #FFFFFF;
+    border-radius: 10px;
+    border-style: outset;
+    background: #191919;
+    width: 340;
+    height: 45;
+    font-size: 40px;
+    padding: 5px;
+    font: bold;
+}
+
+QPushButton:hover {
+    background: #222222;
+}
+
+QPushButton:pressed {
+    border-style: inset;
+    background: #151515;
+}

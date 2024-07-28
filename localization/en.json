@@ -37,5 +37,14 @@
   "game all taps": "taps all time | ",
   "game all balance": "balance all time | ",
   "game statistic": "statistic",
-  "back": "back"
+  "back": "back",
+  "full energy": "full energy",
+  "full energy label": "with this boost you can fill up\nyour energy to the maximum\nin 1 click 3 times!",
+  "coin on tap": "coin on tap (+1)",
+  "coin on tap label": "with this pump you will\n get 2x more coin than \nyou get now",
+  "game lvl up": "game lvl up (+1)",
+  "game lvl up label": "this function will allow you to take\nthe first places in the top\nwhich will be added soon\nyour level is now -",
+  "energy on sec": "energy limit (x2)",
+  "energy on sec label": "it will help you\nget more \nenergy in 2 times\nlimit now -",
+  "user balance": "your current balance ="
 }

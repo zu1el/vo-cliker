@@ -9,13 +9,13 @@ def data_load(file):
 
 
 def user_data_load(file, _id):
-        with open(file, "r", encoding="UTF-8") as data:
-            data = json.load(data)
-        for user in data["users"]:
-            if user["_id"] == _id:
-                return user
-        logger.critical("No user in data")
-        return False
+    with open(file, "r", encoding="UTF-8") as data:
+        data = json.load(data)
+    for user in data["users"]:
+        if user["_id"] == _id:
+            return user
+    logger.critical("No user in data")
+    return False
 
 
 def data_dump(file, data):

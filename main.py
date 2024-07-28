@@ -60,9 +60,11 @@ centerwidget(sing_in, sing_in_line)
 centerwidget(sing_up, sing_up_line)
 
 loginMainLine.addLayout(localization_line)
-for i in range(4): loginMainLine.addWidget(QSplitter())
+for i in range(4):
+    loginMainLine.addWidget(QSplitter())
 loginMainLine.addLayout(label_line)
-for i in range(5): loginMainLine.addWidget(QSplitter())
+for i in range(5):
+    loginMainLine.addWidget(QSplitter())
 loginMainLine.addLayout(info_line)
 loginMainLine.addLayout(login_line)
 loginMainLine.addLayout(password_line)
@@ -137,62 +139,50 @@ game_statistic_v_line = QVBoxLayout()
 game_statistic_back_btn = QPushButton(getcurlenglocal("back"))
 game_statistic_label = QLabel(getcurlenglocal("game statistic"))
 game_statistic_label_line = QHBoxLayout()
+centerwidget(game_statistic_label, game_statistic_label_line)
 game_statistic_id = QLabel(getcurlenglocal("game id"))
 game_statistic_id_line = QHBoxLayout()
+centerwidget(game_statistic_id, game_statistic_id_line)
 game_statistic_login = QLabel(getcurlenglocal("game login"))
 game_statistic_login_line = QHBoxLayout()
+centerwidget(game_statistic_login, game_statistic_login_line)
 game_statistic_cur_balance = QLabel(getcurlenglocal("game current balance"))
 game_statistic_cur_balance_line = QHBoxLayout()
+centerwidget(game_statistic_cur_balance, game_statistic_cur_balance_line)
 game_statistic_on_tap = QLabel(getcurlenglocal("game on tap"))
 game_statistic_on_tap_line = QHBoxLayout()
+centerwidget(game_statistic_on_tap, game_statistic_on_tap_line)
 game_statistic_cur_energy = QLabel(getcurlenglocal("game current energy"))
 game_statistic_cur_energy_line = QHBoxLayout()
+centerwidget(game_statistic_cur_energy, game_statistic_cur_energy_line)
 game_statistic_limit_energy = QLabel(getcurlenglocal("game energy limit"))
 game_statistic_limit_energy_line = QHBoxLayout()
+centerwidget(game_statistic_limit_energy, game_statistic_limit_energy_line)
 game_statistic_reg_date = QLabel(getcurlenglocal("game registr date"))
 game_statistic_reg_date_line = QHBoxLayout()
+centerwidget(game_statistic_reg_date, game_statistic_reg_date_line)
 game_statistic_all_taps = QLabel(getcurlenglocal("game all taps"))
 game_statistic_all_taps_line = QHBoxLayout()
+centerwidget(game_statistic_all_taps, game_statistic_all_taps_line)
 game_statistic_all_balance = QLabel(getcurlenglocal("game all balance"))
 game_statistic_all_balance_line = QHBoxLayout()
-
+centerwidget(game_statistic_all_balance, game_statistic_all_balance_line)
 game_statistic_v_line.addWidget(game_statistic_back_btn)
 
 game_statistic_v_line.addWidget(QSplitter())
 game_statistic_v_line.addWidget(QSplitter())
 
-centerwidget(game_statistic_label, game_statistic_label_line)
 game_statistic_v_line.addLayout(game_statistic_label_line)
-
-centerwidget(game_statistic_id, game_statistic_id_line)
 game_statistic_v_line.addLayout(game_statistic_id_line)
-
-centerwidget(game_statistic_login, game_statistic_login_line)
 game_statistic_v_line.addLayout(game_statistic_login_line)
-
-centerwidget(game_statistic_cur_balance, game_statistic_cur_balance_line)
 game_statistic_v_line.addLayout(game_statistic_cur_balance_line)
-
-centerwidget(game_statistic_all_balance, game_statistic_all_balance_line)
 game_statistic_v_line.addLayout(game_statistic_all_balance_line)
-
-centerwidget(game_statistic_on_tap, game_statistic_on_tap_line)
 game_statistic_v_line.addLayout(game_statistic_on_tap_line)
-
-centerwidget(game_statistic_all_taps, game_statistic_all_taps_line)
 game_statistic_v_line.addLayout(game_statistic_all_taps_line)
-
-centerwidget(game_statistic_cur_energy, game_statistic_cur_energy_line)
 game_statistic_v_line.addLayout(game_statistic_cur_energy_line)
-
-centerwidget(game_statistic_limit_energy, game_statistic_limit_energy_line)
 game_statistic_v_line.addLayout(game_statistic_limit_energy_line)
-
-centerwidget(game_statistic_reg_date, game_statistic_reg_date_line)
 game_statistic_v_line.addLayout(game_statistic_reg_date_line)
-
 game_statistic_main_line.addLayout(game_statistic_v_line)
-
 game_statistic.setLayout(game_statistic_main_line)
 
 game_statistic_v_line.addWidget(QSplitter())
@@ -203,11 +193,132 @@ shop_boosts = QWidget()
 shop_boosts.setStyleSheet(open("Styles/game_boosts.qss").read())
 shop_boosts.setFixedSize(440, 700)
 
+shop_boosts_main_line = QHBoxLayout()
+shop_boosts_v_line = QVBoxLayout()
+
+shop_boosts_back_btn = QPushButton(getcurlenglocal("back"))
+
+shop_boosts_full_energy = QPushButton(getcurlenglocal("full energy"))
+shop_boosts_full_energy.setStyleSheet("""
+QPushButton {
+    color: #FFFFFF;
+    border-radius: 25px;
+    border-style: outset;
+    background: #191919;
+    width: 340;
+    height: 45;
+    font-size: 25px;
+    padding: 5px;
+    font: normal;
+}
+
+QPushButton:hover {
+    background: #222222;
+}
+
+QPushButton:pressed {
+    border-style: inset;
+    background: #151515;
+}""")
+shop_boosts_full_energy_line = QHBoxLayout()
+centerwidget(shop_boosts_full_energy, shop_boosts_full_energy_line)
+
+shop_boosts_full_energy_label = QLabel(getcurlenglocal("full energy label"))
+shop_boosts_full_energy_label_line = QHBoxLayout()
+centerwidget(shop_boosts_full_energy_label, shop_boosts_full_energy_label_line)
+
+shop_boosts_v_line.addWidget(shop_boosts_back_btn)
+shop_boosts_v_line.addWidget(QSplitter())
+shop_boosts_v_line.addLayout(shop_boosts_full_energy_line)
+shop_boosts_v_line.addWidget(QSplitter())
+shop_boosts_v_line.addLayout(shop_boosts_full_energy_label_line)
+shop_boosts_v_line.addWidget(QSplitter())
+shop_boosts_v_line.addWidget(QSplitter())
+shop_boosts_v_line.addWidget(QSplitter())
+shop_boosts_v_line.addWidget(QSplitter())
+shop_boosts_v_line.addWidget(QSplitter())
+shop_boosts_v_line.addWidget(QSplitter())
+shop_boosts_v_line.addWidget(QSplitter())
+shop_boosts_v_line.addWidget(QSplitter())
+shop_boosts_v_line.addWidget(QSplitter())
+shop_boosts_v_line.addWidget(QSplitter())
+shop_boosts_v_line.addWidget(QSplitter())
+shop_boosts_v_line.addWidget(QSplitter())
+shop_boosts_v_line.addWidget(QSplitter())
+shop_boosts_v_line.addWidget(QSplitter())
+
+shop_boosts_main_line.addLayout(shop_boosts_v_line)
+
+shop_boosts.setLayout(shop_boosts_main_line)
+
 # shop-pumping
 shop_pumping = QWidget()
 shop_pumping.setStyleSheet(open("Styles/game_pumping.qss").read())
 shop_pumping.setFixedSize(440, 700)
 
+shop_pumping_main_line = QVBoxLayout()
+shop_pumping_v_line = QVBoxLayout()
+
+shop_pumping_back_btn = QPushButton(getcurlenglocal("back"))
+shop_pumping_back_btn.setStyleSheet("""
+QPushButton {
+    color: #FFFFFF;
+    border-radius: 10px;
+    border-style: outset;
+    background: #191919;
+    width: 340;
+    height: 45;
+    font-size: 40px;
+    padding: 5px;
+    font: bold;
+}
+
+QPushButton:hover {
+    background: #222222;
+}
+
+QPushButton:pressed {
+    border-style: inset;
+    background: #151515;
+}""")
+shop_pumping_on_tap_up_btn = QPushButton(getcurlenglocal("coin on tap"))
+shop_pumping_on_tap_up_btn_line = QHBoxLayout()
+centerwidget(shop_pumping_on_tap_up_btn, shop_pumping_on_tap_up_btn_line)
+shop_pumping_balance_label = QLabel()
+shop_pumping_on_tap_up_btn_label = QLabel(getcurlenglocal("coin on tap label"))
+shop_pumping_game_lvl_up_btn = QPushButton(getcurlenglocal("game lvl up"))
+shop_pumping_game_lvl_up_btn_line = QHBoxLayout()
+centerwidget(shop_pumping_game_lvl_up_btn, shop_pumping_game_lvl_up_btn_line)
+shop_pumping_game_lvl_up_btn_label = QLabel(getcurlenglocal("game lvl up label"))
+shop_pumping_on_sec_up_btn = QPushButton(getcurlenglocal("energy on sec"))
+shop_pumping_on_sec_up_btn_line = QHBoxLayout()
+centerwidget(shop_pumping_on_sec_up_btn, shop_pumping_on_sec_up_btn_line)
+shop_pumping_on_sec_up_btn_label = QLabel(getcurlenglocal("energy on sec label"))
+
+shop_pumping_main_line.addWidget(shop_pumping_back_btn)
+shop_pumping_v_line.addWidget(QSplitter())
+shop_pumping_v_line.addWidget(QSplitter())
+shop_pumping_v_line.addWidget(shop_pumping_balance_label)
+shop_pumping_v_line.addWidget(QSplitter())
+shop_pumping_v_line.addLayout(shop_pumping_on_tap_up_btn_line)
+shop_pumping_v_line.addWidget(shop_pumping_on_tap_up_btn_label)
+shop_pumping_v_line.addWidget(QSplitter())
+shop_pumping_v_line.addWidget(QSplitter())
+shop_pumping_v_line.addLayout(shop_pumping_on_sec_up_btn_line)
+shop_pumping_v_line.addWidget(shop_pumping_on_sec_up_btn_label)
+shop_pumping_v_line.addWidget(QSplitter())
+shop_pumping_v_line.addWidget(QSplitter())
+shop_pumping_v_line.addLayout(shop_pumping_game_lvl_up_btn_line)
+shop_pumping_v_line.addWidget(shop_pumping_game_lvl_up_btn_label)
+shop_pumping_v_line.addWidget(QSplitter())
+shop_pumping_v_line.addWidget(QSplitter())
+shop_pumping_v_line.addWidget(QSplitter())
+shop_pumping_v_line.addWidget(QSplitter())
+
+
+shop_pumping_main_line.addLayout(shop_pumping_v_line)
+
+shop_pumping.setLayout(shop_pumping_main_line)
 
 # func
 
@@ -223,7 +334,8 @@ def localization():
     sing_in.setText(getcurlenglocal("sing-in"))
     sing_up.setText(getcurlenglocal("sing-up"))
     ualocalization.setText(getcurlenglocal("ua-localization"))
-    info.setText(getcurlenglocal(status[1], current_lang)) if info.text() != "" else info.setPlaceholderText(getcurlenglocal(status[1], current_lang))
+    info.setText(getcurlenglocal(status[1], current_lang)) if info.text() != "" else (
+        info.setPlaceholderText(getcurlenglocal(status[1], current_lang)))
 
 
 def menu_func(q):
@@ -277,8 +389,8 @@ def singin(status):
         try:
             progres = 100 / (user["energy limit"] / user["energy"])
             energy_progres.setValue(int(progres))
-
         except Exception as ex:
+            logger.critical(ex)
             energy_progres.setValue(0)
         game.show()
         login.close()
@@ -307,6 +419,7 @@ def singup(status):
             energy_progres.setValue(int(progres))
 
         except Exception as ex:
+            logger.critical(ex)
             energy_progres.setValue(0)
         game.show()
         login.close()
@@ -392,13 +505,18 @@ def cheksingup(user_login, user_password):
                         "_id": len(data["users"]) + 1,
                         "login": user_login,
                         "password": user_password,
-                        "cur balance": 500,
+                        "game lvl": 1,
+                        "cur balance": 0,
                         "on tap": 1,
                         "energy": 500,
-                        "energy limit": 1000,
-                        "regiset date": datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S"),
-                        "taps": 500,
-                        "all balance": 500
+                        "energy limit": 500,
+                        "regiset date": datetime.datetime.now().strftime("%m/%d/%Y"),
+                        "taps": 0,
+                        "all balance": 0,
+                        "boosts": {
+                            "full energy limit": 3,
+                            "full energy current": 3
+                        }
                     }
                     user_data_dump("data/game.json", user)
                     logger_read(log)
@@ -443,6 +561,9 @@ def del_account_accept():
     user["energy limit"] = 500
     user["taps"] = 0
     user["all balance"] = 0
+    user["boosts"] = {"full energy limit": 3, "full energy current": 3}
+    user["game lvl"] = 1
+    user["regiset date"] = datetime.datetime.now().strftime("%m/%d/%Y")
     user_data_dump("data/game.json", user)
     balance.setText(str(user["cur balance"]))
     energy_balance.setText(str(user["energy"]))
@@ -452,13 +573,28 @@ def del_account_accept():
 
 
 def pumping_opne():
+    user = user_data_load("data/game.json", status[1])
     game.close()
     shop_pumping.show()
+    shop_pumping_balance_label.setText(f"""{getcurlenglocal("user balance")} {user["cur balance"]}""")
+    shop_pumping_on_sec_up_btn.setText(f"""{getcurlenglocal("energy on sec")} {user["energy limit"]/5*15}""")
+    shop_pumping_on_tap_up_btn.setText(f"""{getcurlenglocal("coin on tap")} {user["on tap"] / 2 * 1500}""")
+    shop_pumping_game_lvl_up_btn.setText(f"""{getcurlenglocal("game lvl up")} {user["game lvl"]/1.5*1500}""")
+    shop_pumping_on_sec_up_btn_label.setText(f"""{getcurlenglocal("energy on sec label")} {user["energy limit"]}""")
+    shop_pumping_on_tap_up_btn_label.setText(f"""{getcurlenglocal("coin on tap label")} {user["on tap"]}""")
+    shop_pumping_game_lvl_up_btn_label.setText(f"""{getcurlenglocal("game lvl up label")} {user["game lvl"]}""")
+    shop_pumping_back_btn.setText(f"""{getcurlenglocal("back")}""")
 
 
 def boosts_open():
     game.close()
     shop_boosts.show()
+    user = user_data_load("data/game.json", status[1])
+    shop_boosts_back_btn.setText(getcurlenglocal("back"))
+    full_energy_limit = user["boosts"]["full energy limit"]
+    full_energy_curr = user["boosts"]["full energy current"]
+    shop_boosts_full_energy.setText(f"""{getcurlenglocal("full energy")} {full_energy_curr}/{full_energy_limit}""")
+    shop_boosts_full_energy_label.setText(getcurlenglocal("full energy label"))
 
 
 def main_func():
@@ -482,11 +618,106 @@ def statistick_back():
     game.show()
 
 
+def boosts_back():
+    shop_boosts.close()
+    game.show()
+
+
+def full_energy_btn():
+    user = user_data_load("data/game.json", status[1])
+    full_energy_limit = user["boosts"]["full energy current"]
+    if full_energy_limit > 0:
+        user["energy"] = user["energy limit"]
+        user["boosts"]["full energy current"] -= 1
+        shop_boosts_full_energy.setText(f"""{getcurlenglocal("full energy")} {user["boosts"]["full energy current"]}/{user["boosts"]["full energy limit"]}""")
+        user_data_dump("data/game.json", user)
+        gamemenu.setTitle(getcurlenglocal("game"))
+        shopmenu.setTitle(getcurlenglocal("shop"))
+        statistic.setText(getcurlenglocal("statistic"))
+        quit_game.setText(getcurlenglocal("quit"))
+        reset.setTitle(getcurlenglocal("reset-data"))
+        go_menu.setText(getcurlenglocal("go-menu"))
+        reject_reset.setText(getcurlenglocal("reject"))
+        accept_reset.setText(getcurlenglocal("accept"))
+        boosts.setText(getcurlenglocal("boosts"))
+        pumping.setText(getcurlenglocal("pumping"))
+        balance.setText(str(user["cur balance"]))
+        energy_balance.setText(str(user["energy"]))
+        energy_limit.setText(f"""/{user["energy limit"]}""")
+    else:
+        pass
+
+
+def pumping_back():
+    shop_pumping.close()
+    game.show()
+    user = user_data_load("data/game.json", status[1])
+    gamemenu.setTitle(getcurlenglocal("game"))
+    shopmenu.setTitle(getcurlenglocal("shop"))
+    statistic.setText(getcurlenglocal("statistic"))
+    quit_game.setText(getcurlenglocal("quit"))
+    reset.setTitle(getcurlenglocal("reset-data"))
+    go_menu.setText(getcurlenglocal("go-menu"))
+    reject_reset.setText(getcurlenglocal("reject"))
+    accept_reset.setText(getcurlenglocal("accept"))
+    boosts.setText(getcurlenglocal("boosts"))
+    pumping.setText(getcurlenglocal("pumping"))
+    balance.setText(str(user["cur balance"]))
+    energy_balance.setText(str(user["energy"]))
+    energy_limit.setText(f"""/{user["energy limit"]}""")
+
+
+def coin_on_tap_func():
+    user = user_data_load("data/game.json", status[1])
+    if user["cur balance"] >= user["on tap"] / 2 * 1500:
+        user["cur balance"] -= user["on tap"] / 2 * 1500
+        user["on tap"] += 1
+        shop_pumping_on_tap_up_btn.setText(f"""{getcurlenglocal("coin on tap")} {user["on tap"] / 2 * 1500}""")
+        shop_pumping_on_tap_up_btn_label.setText(f"""{getcurlenglocal("coin on tap label")} {user["on tap"]}""")
+        shop_pumping_balance_label.setText(f"""{getcurlenglocal("user balance")} {user["cur balance"]}""")
+        user_data_dump("data/game.json", user)
+    else:
+        pass
+
+
+def game_lvl_up_fumc():
+    user = user_data_load("data/game.json", status[1])
+    if user["cur balance"] >= user["game lvl"]/1.5*1500:
+        user["cur balance"] -= user["game lvl"]/1.5*1500
+        user["game lvl"] += 1
+        shop_pumping_game_lvl_up_btn.setText(f"""{getcurlenglocal("game lvl up")} {user["game lvl"] / 1.5 * 1500}""")
+        shop_pumping_game_lvl_up_btn_label.setText(f"""{getcurlenglocal("game lvl up label")} {user["game lvl"]}""")
+        shop_pumping_balance_label.setText(f"""{getcurlenglocal("user balance")} {user["cur balance"]}""")
+        user_data_dump("data/game.json", user)
+    else:
+        pass
+
+
+def energy_on_sec_func():
+    user = user_data_load("data/game.json", status[1])
+    if user["cur balance"] >= user["energy limit"]/5*15:
+        user["cur balance"] -= user["energy limit"]/5*15
+        user["energy limit"] = user["energy limit"]*2
+        user["energy"] = user["energy limit"]
+        shop_pumping_on_sec_up_btn.setText(f"""{getcurlenglocal("energy on sec")} {user["energy limit"] / 5 * 15}""")
+        shop_pumping_on_sec_up_btn_label.setText(f"""{getcurlenglocal("energy on sec label")} {user["energy limit"]}""")
+        shop_pumping_balance_label.setText(f"""{getcurlenglocal("user balance")} {user["cur balance"]}""")
+        user_data_dump("data/game.json", user)
+    else:
+        pass
+
+
 ualocalization.clicked.connect(localization)
 sing_in.clicked.connect(lambda: cehksingin(login_input.text(), password_input.text()))
 sing_up.clicked.connect(lambda: cheksingup(login_input.text(), password_input.text()))
 main_btn.clicked.connect(lambda: main_func())
 game_statistic_back_btn.clicked.connect(lambda: statistick_back())
+shop_boosts_back_btn.clicked.connect(lambda: boosts_back())
+shop_boosts_full_energy.clicked.connect(lambda: full_energy_btn())
+shop_pumping_back_btn.clicked.connect(lambda: pumping_back())
+shop_pumping_on_sec_up_btn.clicked.connect(lambda: energy_on_sec_func())
+shop_pumping_on_tap_up_btn.clicked.connect(lambda: coin_on_tap_func())
+shop_pumping_game_lvl_up_btn.clicked.connect(lambda: game_lvl_up_fumc())
 
 gamemenu.triggered[QAction].connect(menu_func)
 shopmenu.triggered[QAction].connect(menu_func)

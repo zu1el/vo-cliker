@@ -1,0 +1,38 @@
+QWidget {
+    background: #222222;
+    background-image: url("photo/pumping_bg.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+QSplitter {
+background: rgba(0, 0, 0, 0);
+}
+
+QLabel {
+    color: #FFFFFF;
+    font-size: 20px;
+    qproperty-alignment: AlignCenter;
+    background: rgba(0, 0, 0, 0);
+
+}
+QPushButton {
+    width: 340;
+    height: 45;
+    color: #FFFFFF;
+    border-radius: 20px;
+    border-style: outset;
+    background: #181818;
+
+    font-size: 25px;
+    padding: 10px;
+}
+
+QPushButton:hover {
+    background: #222222;
+}
+
+QPushButton:pressed {
+    border-style: inset;
+    background: #151515;
+}
