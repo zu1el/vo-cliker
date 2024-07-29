@@ -5,13 +5,13 @@
             "login": "zufel",
             "password": "password",
             "game lvl": 1,
-            "cur balance": 645.0,
-            "on tap": 4,
-            "energy": 345,
+            "cur balance": 0,
+            "on tap": 1,
+            "energy": 500,
             "energy limit": 500,
-            "regiset date": "18.06.2024",
-            "taps": 47,
-            "all balance": 155,
+            "regiset date": "07/29/2024",
+            "taps": 0,
+            "all balance": 0,
             "boosts": {
                 "full energy limit": 3,
                 "full energy current": 3
@@ -146,6 +146,23 @@
             "energy": 500,
             "energy limit": 500,
             "regiset date": "07/28/2024",
+            "taps": 0,
+            "all balance": 0,
+            "boosts": {
+                "full energy limit": 3,
+                "full energy current": 3
+            }
+        },
+        {
+            "_id": 10,
+            "login": "asd",
+            "password": "asd",
+            "game lvl": 1,
+            "cur balance": 0,
+            "on tap": 1,
+            "energy": 500,
+            "energy limit": 500,
+            "regiset date": "07/29/2024",
             "taps": 0,
             "all balance": 0,
             "boosts": {

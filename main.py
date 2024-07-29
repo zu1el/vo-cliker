@@ -1,10 +1,13 @@
 import datetime
-from PyQt5.QtWidgets import *
-from localization import Local, current_lang
-from loger import logger, logger_read
-import sys
 import json
-from data import user_data_dump, user_data_load, data_dump, data_load
+import sys
+
+from PyQt5.QtWidgets import *
+
+from data import user_data_dump, user_data_load
+from localization import Local, current_lang
+
+from loger import logger, logger_read
 
 ua, en = Local("localization/ua.json"), Local("localization/en.json")
 status = [False, "debug-line"]

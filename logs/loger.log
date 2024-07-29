@@ -1,3 +1,5 @@
-loger 2024-07-28 19:45:21,118 INFO try to sing in as usret:123
-loger 2024-07-28 19:45:21,119 INFO data dump sucefulled
-loger 2024-07-28 19:45:21,120 INFO sing in sucefulled as usret
+loger 2024-07-29 23:24:05,927 INFO localization lang set to ua
+loger 2024-07-29 23:24:08,020 INFO try to sing in as :
+loger 2024-07-29 23:24:08,021 INFO data dump sucefulled
+loger 2024-07-29 23:24:08,021 ERROR No input login
+loger 2024-07-29 23:24:08,021 CRITICAL No user in data
